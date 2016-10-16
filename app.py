@@ -1,12 +1,14 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 from functools import wraps
 
 app = Flask(__name__)
-app.secret_key = '48cd3f6h1jkL'
+app.secret_key = '48cd3f6p'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://jlee7737:@localhost/calbang'
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
 
 def login_required(f):
     @wraps(f)
