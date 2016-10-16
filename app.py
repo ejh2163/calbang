@@ -1,17 +1,25 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from functools import wraps
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://jlee7737:@localhost/c9'
+app.secret_key = '48cd3f6h1jkL'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://jlee7737:@localhost/calbang'
 db = SQLAlchemy(app)
 
-wsgi_app = app.wsgi_app
-
-from routes import *
-
-
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('You need to login first')
+            return redirect (url_for('login'))
+    return wrap
+    
+from models import *
+from views import *
 
 if __name__ == "__main__":
     app.run(
