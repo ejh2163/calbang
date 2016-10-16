@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="row">
+    <!--{% for post in posts: %}-->
+        <div class="col-xs-6 col-sm-3 col-md-3">
+            <div class="card fade-in">
+                <div class="views-tag">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                </div>
+                <a class="img-card" href="">
+                    <img />
+                </a>
+                
+                <div class="card-content">
+                    <h3 class="card-title ellipsis">
+                        <a href=""></a>
+                    </h3>
+                    <div class="card-description ellipsis">
+                        switch($page){
+                        case "":
+                        "Home"; break;
+                        case "jobs":
+                        desc_jobs($row); break;
+                        case "sale":
+                        desc_sale($row); break;
+                        case "cars":
+                        desc_cars($row); break;
+                        case "homes":
+                        desc_homes($row); break;
+                        case "services":
+                        " services list"; break;
+                        case "free":
+                        " 자유게시판"; break;
+                        }
+                    </div>
+                </div>
+                
+                <div class="card-read-more ellipsis">
+                    <p style="float:left;"></p>
+                    <p style="float:right; font-style:italic;"></p>
+                </div>
+            </div>
+        </div>
+    <!--{% endfor %}-->
+</div>
+{% endblock %}
