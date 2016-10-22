@@ -1,5 +1,5 @@
 from flask import Flask, flash, request, render_template, redirect, session, url_for, Blueprint
-from models import Post
+from project.models import Post
 
 
 post_blueprint = Blueprint('post', __name__, template_folder='templates')

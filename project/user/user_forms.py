@@ -14,6 +14,7 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('remember_me', default=False)
     login = SubmitField('로그인')
 
+
 class RegisterForm(FlaskForm):  
     username = TextField('username', [
         validators.Required(message='아이디를 입력해주세요'),

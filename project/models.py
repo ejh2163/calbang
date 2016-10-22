@@ -1,5 +1,5 @@
 from flask_login import UserMixin
-from extensions import db
+from project import db
 from werkzeug import generate_password_hash, check_password_hash
 
 
