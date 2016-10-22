@@ -3,7 +3,7 @@ from flask import Flask
 from extensions import db, login_manager, csrf
 
 app = Flask(__name__)
-app.config.from_object(config.DevConfig)
+app.config.from_object('config.DevConfig')
 
 # flask-sqlalchemy
 db.init_app(app)
