@@ -5,6 +5,7 @@ from extensions import db, login_manager, csrf
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 
+
 # flask-sqlalchemy
 db.init_app(app)
 # flask-login
@@ -16,10 +17,14 @@ def load_user(id):
 csrf.init_app(app)
 
 
-from views import *
+from project.home.views import home_blueprint
+from project.user.views import user_blueprint
+from project.post.views import post_blueprint
+
+app.register_blueprint(home_blueprint)
+app.register_blueprint(user_blueprint)
+app.register_blueprint(post_blueprint)
 
 if __name__ == "__main__":
-    app.run()
-        #host = os.getenv('IP', '0.0.0.0'), 
-        #port = int(os.getenv('PORT', 8080)),
-        #)
+    #app.run()
+    app.run(host = os.getenv('IP', '0.0.0.0'), port = int(os.getenv('PORT', 8080)))

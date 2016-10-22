@@ -1,8 +1,9 @@
 from flask_wtf import FlaskForm
 from wtforms import (BooleanField, TextField, HiddenField, PasswordField,
     DateTimeField, validators, IntegerField, SubmitField)
-from wtforms.fields.html5 import EmailField  
-    
+from wtforms.fields.html5 import EmailField
+
+
 class LoginForm(FlaskForm):  
     username = TextField('username', [
         validators.Required(message='아이디를 입력해주세요')

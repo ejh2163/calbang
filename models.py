@@ -1,6 +1,7 @@
 from flask_login import UserMixin
-from werkzeug import generate_password_hash, check_password_hash
 from extensions import db
+from werkzeug import generate_password_hash, check_password_hash
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -16,6 +17,7 @@ class User(db.Model, UserMixin):
         self.email = email
         self.username = username
         self.password = generate_password_hash(password)
+        self.verified = 0
     
     def __repr__(self):
         return '<User %r>' % self.username

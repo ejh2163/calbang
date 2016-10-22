@@ -13,4 +13,4 @@ class DevConfig(Config):
     
 class ProdConfig(Config):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = 'mysql://jlee7737:@localhost/calbang'
+    SQLALCHEMY_DATABASE_URI = ''
