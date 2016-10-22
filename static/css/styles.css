@@ -1,11 +1,11 @@
 
 @font-face {
     font-family: nanumpenscript;
-    src: url(NanumPenScript-Regular.ttf);
+    src: url(../fonts/NanumPenScript-Regular.ttf);
 }
 @font-face {
     font-family: nanumgothic;
-    src: url(NanumGothic-Bold.ttf);
+    src: url(../fonts/NanumGothic-Bold.ttf);
 }
 
 html,
@@ -13,6 +13,9 @@ body{
     height: 100%;
     background-color: #f6f6f6;
     font-family: Raleway, arial;
+}
+p, span {
+    margin: 0;
 }
 hr {
     border-bottom: 1px solid #d4d4d4;

@@ -1,33 +1,102 @@
 from flask import Flask, flash, request, render_template, redirect, session, url_for
-from app import app, login_required
+from flask_login import login_required, login_user, current_user, logout_user, confirm_login, login_fresh
+from app import app
+from extensions import db
+from models import User, Post
+from user_forms import LoginForm, RegisterForm
+from werkzeug import generate_password_hash
+from time import strftime
 
 @app.route('/')
 def home():
     return render_template('/content/home.html')
 
+# ==================================================
+# USER MANAGEMENT ROUTES & VIEWS
+# ==================================================
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        flash('You are already logged in')
+        return redirect(url_for('home'))
+    
+    form = RegisterForm()
+    
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            if User.is_email_taken(form.email.data):
+                flash('This email is already registered!')
+            elif User.is_username_taken(form.username.data):
+                flash('This username is already taken!')
+            else:    
+                new_user = User(
+                    date_joined = strftime("%Y-%m-%d"),
+                    email = form.email.data,
+                    username = form.username.data,
+                    password = form.password.data,
+                    verified = 0
+                    )
+                db.session.add(new_user)
+                db.session.commit()
+                
+                # commented until email verification is set up: return redirect(url_for('verify'))
+                flash('You have succesfully been registered!')
+                return redirect(url_for('home'))
+                
+            return render_template('/content/register.html', form=form)
+        else:
+            return render_template('/content/register.html', form=form)
+    elif request.method == 'GET':
+        return render_template('/content/register.html', form=form)
+
+@app.route('/verify')
+def verify():
+    return render_template('/content/verify.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
+    if current_user.is_authenticated:
+        flash('You are already logged in')
+        return redirect(url_for('home'))
+    
+    form = LoginForm()
+    
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
-            error = 'Invalid credentials. Please try again.'
+        if form.validate_on_submit():
+            user, authenticated = User.authenticate(form.username.data, form.password.data)
+            if user:
+                if authenticated:
+                    login_user(user, remember=form.remember_me.data)
+                    flash('You have successfully logged in')
+                    return redirect(url_for('home'))
+                else:
+                    flash('아이디/비밀번호가 일치하지 않습니다')
+                    return render_template('/content/login.html', form=form)
+            else:
+                flash('아이디가 가입되지 않았습니다')
+                return render_template('/content/login.html', form=form)
         else:
-            session['logged_in'] = True
-            flash('you were just logged in!')
-            return redirect(url_for('home'))
-    return render_template('/content/login.html', error=error)
+            return render_template('/content/login.html', form=form)
+    elif request.method == 'GET':
+        return render_template('/content/login.html', form=form)
 
 @app.route('/logout')
 @login_required
 def logout():
     session.pop('logged_in', None)
-    flash('you were just logged out!')
+    logout_user()
     return redirect(url_for('home'))
-    
-@app.route('/register')
-def register():
-    return render_template('/content/register.html')
 
+@app.route('/profile')
+@login_required
+def profile():
+    return render_template('/content/profile.html')
+
+
+# ==================================================
+# PAGE ROUTES & VIEWS
+# ==================================================
 @app.route('/<category>')
 def posts(category):
     return render_template('/content/posts.html', category=category)

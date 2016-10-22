@@ -1,60 +1,74 @@
-from app import db, bcrypt
-from sqlalchemy.orm import relationship
+from flask_login import UserMixin
+from werkzeug import generate_password_hash, check_password_hash
+from extensions import db
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     date_joined = db.Column(db.Date, nullable=False)
-    username = db.Column(db.String(60), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    username = db.Column(db.String(30), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    verified = db.Column(db.Boolean, default=0)
-    posts = relationship('Post', backref='author')
-
-    def __init__(self, date_joined, username, email, password, verified):
+    verified = db.Column(db.Boolean, nullable=False)
+    
+    def __init__(self, date_joined, email, username, password, verified):
         self.date_joined = date_joined
-        self.username = username
         self.email = email
-        self.password = bcrypt.generate_password_hash(password)
-        self.verified = 0
-
+        self.username = username
+        self.password = generate_password_hash(password)
+    
     def __repr__(self):
         return '<User %r>' % self.username
-       
-       
-class Pages(db.Model):
-    __tablename__ = 'pages'
-    id = db.Column(db.Integer, primary_key=True)
-    page_name = db.Column(db.String(12))
+        
+    def set_password(self, password_input):
+        self.password = generate_password_hash(password_input)
 
-    def __init__(self, page_name):
-        self.page_name = page_name
+    def check_password(self, password_input):
+        if self.password is None:
+            return False
+        return check_password_hash(self.password, password_input)
 
-    def __repr__(self):
-        return '<Page %r>' % self.page_name
- 
- 
+    @classmethod
+    def authenticate(cls, username, password):
+        user = User.query.filter(db.or_(User.username == username)).first()
+        if user:
+            authenticated = user.check_password(password)
+        else:
+            authenticated = False
+        return user, authenticated
+      
+    @classmethod
+    def is_username_taken(cls, username):
+        return db.session.query(db.exists().where(User.username==username)).scalar()
+    
+    @classmethod
+    def is_email_taken(cls, email):
+        return db.session.query(db.exists().where(User.email==email)).scalar()
+
+
 class Post(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
     date_posted = db.Column(db.Date, nullable=False)
-    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    page_id = db.Column(db.Integer, db.ForeignKey('pages.id'))
+    username = db.Column(db.String(120), nullable=False)
+    page = db.Column(db.String(12), nullable=False)
     subject = db.Column(db.String(120), nullable=False)
     body = db.Column(db.Text)
     
+    image_ext = db.Column(db.String(240), default='/static/images/no-photo.png')
     bedrooms = db.Column(db.Integer)
     bathrooms = db.Column(db.Integer)
     parking = db.Column(db.Integer)
     sqft = db.Column(db.Integer)
 
-    def __init__(self, date_posted, author_id, page_id, subject, body, bedrooms, bathrooms, parking, sqft):
+    def __init__(self, date_posted, username, page, subject, body, image_ext, bedrooms, bathrooms, parking, sqft):
         self.date_posted = date_posted
-        self.author_id = author_id
-        self.page_id = page_id
+        self.username = username
+        self.page = page
         self.subject = subject
         self.body = body
         
+        self.image_ext = image_ext
         self.bedrooms = bedrooms
         self.bathrooms = bathrooms
         self.parking = parking

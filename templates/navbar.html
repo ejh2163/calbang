@@ -14,29 +14,19 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li>
-					<a href="/homestay">하숙</a>
-				</li>
-				<li>
-					<a href="/rent">렌트</a>
-				</li>
-				<li>
-					<a href="/realestate">부동산</a>
-				</li>
+				<li><a href="/bnb">민박</a></li>
+				<li><a href="/homestay">하숙</a></li>
+				<li><a href="/rent">렌트</a></li>
+				<li><a href="/realestate">부동산</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i> 회원가입</a>
-				</li>
-				<li>
-					<a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> 로그인</a>
-				</li>
-				<li>
-					<a href="/profile"><i class="fa fa-user" aria-hidden="true"></i> USERNAME </a>
-				</li>
-				<li>
-					<a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 로그아웃</a>
-				</li>
+				{% if session['logged_in'] == True %}
+					<li><a href="/profile"><i class="fa fa-user" aria-hidden="true"></i> USERNAME </a></li>
+					<li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 로그아웃</a></li>
+				{% else %}
+					<li><a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i> 회원가입</a></li>
+					<li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> 로그인</a></li>
+				{% endif %}
 			</ul>
 		</div>
 	</div>

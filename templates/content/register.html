@@ -3,43 +3,50 @@
 {% block content %}
 <div class='row'>
     <div class="col-md-4 col-md-offset-4 fade-in">
-        <h2 style="text-align:center;">Welcome!</h2>
+        <h3 style="text-align:center;">Welcome!</h3>
         <br />
         <form method="post" action="">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="form-group">
-                <input type="email" class="form-control" name="email" placeholder="E-mail*">
+                {{ form.email(class="form-control", placeholder="E-mail*") }}
+                {% for message in form.email.errors %}
+                    <p style="font-size:12px; color:red; margin-top:1px">&nbsp{{ message }}</p>
+                {% endfor %}
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" name="username" placeholder="아이디*">
+                {{ form.username(class="form-control", placeholder="아이디*") }}
+                {% for message in form.username.errors %}
+                    <p style="font-size:12px; color:red; margin-top:1px">&nbsp{{ message }}</p>
+                {% endfor %}
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="비밀번호*">
+                {{ form.password(class="form-control", placeholder="비밀번호*") }}
+                {% for message in form.password.errors %}
+                    <p style="font-size:12px; color:red; margin-top:1px">&nbsp{{ message }}</p>
+                {% endfor %}
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" name="password_again" placeholder="비밀번호 확인*">
+                {{ form.password_check(class="form-control", placeholder="비밀번호 확인*") }}
+                {% for message in form.password_check.errors %}
+                    <p style="font-size:12px; color:red; margin-top:1px">&nbsp{{ message }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.tc_check(value="tc-agree") }}
+                <span style="font-size:13px">모든 <a data-toggle="modal" href="#tc-modal">이용약관</a>에 동의합니다*</span>
+                {% for message in form.tc_check.errors %}
+                    <p style="font-size:12px; color:red; margin-top:1px">&nbsp{{ message }}</p>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-sign btn-lg btn-block") }}
             </div>
             <hr>
-            <div class="form-group">
-                <label class="sign-attr-text">생년월일</label>
-                <input type="date" class="form-control" id="" placeholder="">
-            </div>
-            <div class="form-group">
-                <label class="sign-attr-text">성별: </label>
-                <label class="radio-inline"><input type="radio" name="gender" id="maleRadio" value="Male">남&nbsp</label>
-                <label class="radio-inline"><input type="radio" name="gender" id="femaleRadio" value="Female">여&nbsp</label>
-                <label class="radio-inline"><input type="radio" name="gender" id="otherRadio" value="Other">Other</label>
-            </div>
-            <hr>
-            <div class="form-group">
-                <input type="checkbox"> 모든 <a data-toggle="modal" href="#tc-modal">이용약관</a>에 동의합니다
-            </div>
-            <div class="form-group">
-                <div class="g-recaptcha" data-sitekey="6LevTgkUAAAAAHBXBHGywqz-VpaMoZN96x3KDNQX"></div>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-sign btn-lg btn-block" value="signup"><b>가입하기</b></button>
-            </div>
         </form>
+        <div class="text-center" style="font-size:12px">
+            <p>이미 회원이세요?</p>
+            <a href="/login">로그인하기</a>
+        </div>
     </div>
 </div><!-- END outer row -->
 

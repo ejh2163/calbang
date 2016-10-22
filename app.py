@@ -1,31 +1,25 @@
 import os
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
-from functools import wraps
+from extensions import db, login_manager, csrf
 
 app = Flask(__name__)
-app.secret_key = '48cd3f6p'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://jlee7737:@localhost/calbang'
-db = SQLAlchemy(app)
-bcrypt = Bcrypt(app)
+app.config.from_object(os.environ['APP_SETTINGS'])
 
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            flash('You need to login first')
-            return redirect (url_for('login'))
-    return wrap
-    
-from models import *
+# flask-sqlalchemy
+db.init_app(app)
+# flask-login
+login_manager.setup_app(app)
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(id)
+# flask-wtf
+csrf.init_app(app)
+
+
 from views import *
 
 if __name__ == "__main__":
     app.run(
         host = os.getenv('IP', '0.0.0.0'), 
         port = int(os.getenv('PORT', 8080)),
-        debug = True
         )
