@@ -1,22 +1,24 @@
 from flask import Flask, flash, request, render_template, redirect, session, url_for, Blueprint
 from project.models import Post
+from flask_sqlalchemy import *
 
 
 post_blueprint = Blueprint('post', __name__, template_folder='templates')
 
 
-@post_blueprint.route('/<category>')
-def posts(category):
-    return render_template('/posts.html', category=category)
+@post_blueprint.route('/<page>')
+def posts(page):
+    posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).limit(100).all()
+    return render_template('/posts.html', posts=posts, page=page)
     
 @post_blueprint.route('/view/<int:post_id>')
 def view(post_id):
     return render_template('/view.html')
 
-@post_blueprint.route('/<category>/edit', methods=['GET', 'POST'])
-def edit(category):
+@post_blueprint.route('/<page>/edit', methods=['GET', 'POST'])
+def edit(page):
     if request.method == 'GET':
-        return render_template('/edit.html', cat=category)
+        return render_template('/edit.html', page=page)
     elif request.method == 'POST':
         listings = {
             'subject': request.form['subject'],
@@ -34,7 +36,7 @@ def edit(category):
         # store data in data store
         # code
         # code 
-        return render_template('/view.html', cat=category, posts=posts)
+        return render_template('/view.html', page=page, posts=posts)
     else:
         return render_template(error_page.html)
         

@@ -3,7 +3,7 @@
 {% block content %}
 <div class='row'>
     <div class="col-md-4 col-md-offset-4 fade-in">
-        <h3 class="sign-up-title" style="text-align:center;">Welcome Back!</h3>
+        <h3 style="text-align:center;">Welcome Back!</h3>
         <form method="post" action="" accept-charset="UTF-8">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <br />
@@ -20,17 +20,18 @@
                 {% endfor %}
             </div>
             <div class="form-group">
+                {{ form.remember_me(value='True') }}
+                <span style="font-size:13px">로그인 상태 유지하기</span>
+            </div>
+            <div class="form-group">
                 {{ form.login(class="btn btn-sign btn-lg btn-block") }}
                 <!--<p class="pull-right" style="font-size:12px"></p>-->
             </div>
-            <div class="form-group">
-                {{ form.remember_me }}
-                <span style="font-size:13px">로그인 상태 유지하기</span>
-            </div>
+            
             <hr>
         </form>
         <div class="text-center" style="font-size:12px">
-            <p><a href="/reset">아이디 찾기</a>&nbsp | &nbsp<a href="/reset">비밀번호 찾기</a></p>
+            <p><a href="/reset">아이디 찾기</a>&nbsp | &nbsp<a href="/reset">비밀번호 변경</a></p>
             <br />
             <p>아직 아이디가 없으세요?</p>
             <a href="/register">회원가입하기</a>

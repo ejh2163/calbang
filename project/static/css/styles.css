@@ -7,6 +7,10 @@
     font-family: nanumgothic;
     src: url(../fonts/NanumGothic-Bold.ttf);
 }
+@font-face {
+    font-family: jejugothic;
+    src: url(../fonts/JejuGothic-Regular.ttf);
+}
 
 html,
 body{
@@ -15,7 +19,8 @@ body{
     font-family: Raleway, arial;
 }
 p, span {
-    margin: 0;
+    margin: 0px;
+    padding: 0px;
 }
 hr {
     border-bottom: 1px solid #d4d4d4;
@@ -27,8 +32,8 @@ hr {
     max-width: 940px;
 }
 .content{
-    min-height: 720px;
-    margin-top: 72px;
+    min-height: 660px;
+    margin-top: 66px;
 }
 .heading-box{
     margin: 3px 0px 3px 0px;
@@ -107,23 +112,6 @@ hr {
     color: #0066CD;
 }
 
-/* ad unit CSS */
-.ad-skyscraper-left { 
-    width: 160px; 
-    height: 600px; 
-    border: 1px solid red;
-    display:block; 
-    position:fixed; 
-    margin-top:100px; 
-    margin-left:-200px; 
-}
-.ad-skyscraper-right { 
-    display: block; 
-    position: fixed; 
-    margin-top: 100px; 
-    margin-left: 960px; 
-}
-
 /* card page CSS */
 .btn-edit{
     float: right;
@@ -160,9 +148,9 @@ hr {
     display: block;
     position: relative;
     margin: 3px -12px 3px -12px;
-    height: 228px;
+    height: 255px;
     background-color: #ffffff;
-    border-radius: 3px;
+    border-radius: 0px;
     border: 1px solid #d4d4d4;
     transition: box-shadow .25s;
     overflow: hidden;
@@ -183,7 +171,7 @@ hr {
 } /*http://stackoverflow.com/questions/17342315/mysql-increase-value-when-button-is-clicked*/
 .img-card {
     width: 100%;
-    height: 141px;
+    height: 144px;
     border-top-left-radius:0px;
     border-top-right-radius:0px;
     display:block;
@@ -191,16 +179,17 @@ hr {
 }
 .img-card img{
     width: 100%;
-    height: 141px;
+    height: 144px;
     object-fit: cover;
     transition: all .25s ease;
 }
-.card-title {
-    padding: 4px 6px 2px 6px;
-    margin: 0px;
+.card-content{
     text-align: left;
-    font-size: 13.5px;
+}
+.card-title {
+    padding: 6px 6px 3px 6px;
     font-weight: bold;
+    font-size: 14px;
 }
 .card-title a {
     color: #0066CD;
@@ -210,23 +199,19 @@ hr {
     color: #004081;
     text-decoration: none;
 }
-.card-description {
-    padding: 2px 6px 2px 6px;
-    text-align: left;
-}
 .card-desc-1 {
-    margin: 0px;
-    color: #444444;
+    padding: 0px 6px 6px 6px;
+    font-weight: normal;
     font-size: 14px;
-    font-weight: bold;
 }
 .card-desc-2 {
-    margin: 0px;
-    font-size: 13px;
-    font-weight: normal;
+    padding: 12px 6px 3px 6px;
+    color: #444444;
+    font-weight: bold;
+    font-size: 16px;
 }
 .card-read-more {
-    padding: 2px 6px 6px 6px;
+    padding: 1px 6px 6px 6px;
     border-top: 1px solid #D4D4D4;
     color: #757575;
     font-size: 11px;
@@ -288,25 +273,25 @@ hr {
 @media only screen and (max-width : 991px) {
 /* only size 'sm' and below */
     .img-card {
-        height: 120px;
+        height: 114px;
     }
     .img-card img{
-        height: 120px;
+        height: 114px;
     }
     .card{
-        height: 204px;
+        height: 219px;
     }
     .card-title {
-        font-size: 13.5px;
+        font-size: 13px;
     }
     .card-desc-1 {
-        font-size: 13.5px;
+        font-size: 13px;
     }
     .card-desc-2 {
-        font-size: 12.5px;
+        font-size: 15px;
     }
     .card-read-more {
-        font-size: 10.5px;
+        font-size: 10px;
     }
     .card-premium-empty a{
         font-size: 13px;
@@ -314,27 +299,7 @@ hr {
 }
 @media only screen and (max-width : 767px) {
 /* only size 'xs' and below */
-    .img-card {
-        height: 114px;
-    }
-    .img-card img{
-        height: 114px;
-    }
-    .card{
-        height: 195px;
-    }
-    .card-title {
-        font-size: 13px;
-    }
-    .card-desc-1 {
-        font-size: 13px;
-    }
-    .card-desc-2 {
-        font-size: 12px;
-    }
-    .card-read-more {
-        font-size: 10px;
-    }
+
 }
 
 /*"http://www.fostrap.com/"*/

@@ -2,31 +2,42 @@
 
 {% block content %}
 <div class="row">
-    <!--{% for post in posts: %}-->
+    {% for post in posts: %}
         <div class="col-xs-6 col-sm-3 col-md-3">
             <div class="card fade-in">
                 <div class="views-tag">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    <i class="fa fa-eye" aria-hidden="true"></i>&nbsp{{ post.viewed }}
                 </div>
                 <a class="img-card" href="">
-                    <img src="{{ posts.image_ext }}" />
+                    {% if not post.image_ext: %}
+                        <img src="{{ url_for('static', filename='images/no-photo.png') }}" />
+                    {% else %}
+                        <img src="{{ post.image_ext }}" />
+                    {% endif %}
                 </a>
                 
                 <div class="card-content">
-                    <h3 class="card-title ellipsis">
-                        <a href=""></a>
-                    </h3>
-                    <div class="card-description ellipsis">
-                        
-                    </div>
+                    <p class="card-title ellipsis">
+                        <a href="">{{ post.subject }}</a>
+                    </p>
+                    
+                    <p class="card-desc-1 ellipsis">
+                        {{ post.bedrooms }} 방 •
+                        {{ post.bathrooms }} 화 •
+                        {{ post.parking }} 파킹
+                    </p>
+
+                    <p class="card-desc-2 ellipsis">
+                        {{ '$ {:,}'.format(post.price) }}
+                    </p>
                 </div>
-                
+
                 <div class="card-read-more ellipsis">
-                    <p style="float:left;"></p>
-                    <p style="float:right; font-style:italic;"></p>
+                    <p style="float:left;">{{ post.date_posted }}</p>
+                    <p style="float:right; font-style:italic;">{{ post.username }}</p>
                 </div>
             </div>
         </div>
-    <!--{% endfor %}-->
+    {% endfor %}
 </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from project import db
 from werkzeug import generate_password_hash, check_password_hash
+from flask_login import current_user
 
 
 class User(db.Model, UserMixin):
@@ -16,12 +17,12 @@ class User(db.Model, UserMixin):
         self.date_joined = date_joined
         self.email = email
         self.username = username
-        self.password = generate_password_hash(password)
+        self.password = generate_password_hash(password, method='pbkdf2:sha256:100000')
         self.verified = 0
     
     def __repr__(self):
         return '<User %r>' % self.username
-        
+
     def set_password(self, password_input):
         self.password = generate_password_hash(password_input)
 
@@ -54,27 +55,34 @@ class Post(db.Model):
     date_posted = db.Column(db.Date, nullable=False)
     username = db.Column(db.String(120), nullable=False)
     page = db.Column(db.String(12), nullable=False)
+    viewed = db.Column(db.Integer, nullable=False, default=0)
     subject = db.Column(db.String(120), nullable=False)
     body = db.Column(db.Text)
+    price = db.Column(db.Integer, nullable=False, default=0)
     
     image_ext = db.Column(db.String(240), default='/static/images/no-photo.png')
-    bedrooms = db.Column(db.Integer)
-    bathrooms = db.Column(db.Integer)
-    parking = db.Column(db.Integer)
-    sqft = db.Column(db.Integer)
+    bedrooms = db.Column(db.Integer())
+    bathrooms = db.Column(db.Integer())
+    parking = db.Column(db.Integer())
+    sqft = db.Column(db.Integer())
+    year = db.Column(db.Integer())
 
-    def __init__(self, date_posted, username, page, subject, body, image_ext, bedrooms, bathrooms, parking, sqft):
+    def __init__(self, date_posted, username, page, viewed, subject, body, price, 
+                image_ext, bedrooms, bathrooms, parking, sqft, year):
         self.date_posted = date_posted
-        self.username = username
+        self.username = current_user.username
         self.page = page
+        self.viewed = viewed
         self.subject = subject
         self.body = body
+        self.price = price
         
         self.image_ext = image_ext
         self.bedrooms = bedrooms
         self.bathrooms = bathrooms
         self.parking = parking
         self.sqft = sqft
+        self.year = year
         
     def __repr__(self):
         return '<%>' % self.subject

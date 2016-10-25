@@ -14,18 +14,18 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li><a href="/bnb">민박</a></li>
-				<li><a href="/homestay">하숙</a></li>
-				<li><a href="/rent">렌트</a></li>
-				<li><a href="/realestate">부동산</a></li>
+				<li {% if page=='bnb': %} class="nav-active"{% endif %}><a href="/bnb">민박</a></li>
+				<li {% if page=='homestay': %} class="nav-active"{% endif %}><a href="/homestay">하숙</a></li>
+				<li {% if page=='rent': %} class="nav-active"{% endif %}><a href="/rent">렌트</a></li>
+				<li {% if page=='realestate': %} class="nav-active"{% endif %}><a href="/realestate">부동산</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				{% if session['logged_in'] == True %}
-					<li><a href="/profile"><i class="fa fa-user" aria-hidden="true"></i> USERNAME </a></li>
+				{% if current_user.is_authenticated: %}
+					<li{% if page=='profile': %} class="nav-active"{% endif %}><a href="/profile"><i class="fa fa-user" aria-hidden="true"></i> {{ current_user.username }}</a></li>
 					<li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 로그아웃</a></li>
 				{% else %}
-					<li><a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i> 회원가입</a></li>
-					<li><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> 로그인</a></li>
+					<li{% if page=='register': %} class="nav-active"{% endif %}><a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i> 회원가입</a></li>
+					<li{% if page=='login': %} class="nav-active"{% endif %}><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i> 로그인</a></li>
 				{% endif %}
 			</ul>
 		</div>

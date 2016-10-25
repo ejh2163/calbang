@@ -26,7 +26,7 @@
     <div class="content">
         <div class="container">
             {% for message in get_flashed_messages() %}
-                {{ message }}
+                <div class="alert alert-danger" role="alert">{{ message }}</div>
             {% endfor %}
             
             {% block content %}
@@ -36,4 +36,3 @@
     {% include 'footer.html' %}
 </body>
 </html>
-
