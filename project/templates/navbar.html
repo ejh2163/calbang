@@ -14,10 +14,10 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li {% if page=='bnb': %} class="nav-active"{% endif %}><a href="/bnb/1">민박</a></li>
-				<li {% if page=='homestay': %} class="nav-active"{% endif %}><a href="/homestay/1">하숙</a></li>
-				<li {% if page=='rent': %} class="nav-active"{% endif %}><a href="/rent/1">렌트</a></li>
-				<li {% if page=='realestate': %} class="nav-active"{% endif %}><a href="/realestate/1">부동산</a></li>
+				<li {% if page=='bnb': %} class="nav-active"{% endif %}><a href="/bnb">민박</a></li>
+				<li {% if page=='homestay': %} class="nav-active"{% endif %}><a href="/homestay">하숙</a></li>
+				<li {% if page=='rent': %} class="nav-active"{% endif %}><a href="/rent">렌트</a></li>
+				<li {% if page=='realestate': %} class="nav-active"{% endif %}><a href="/realestate">부동산</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				{% if current_user.is_authenticated: %}
