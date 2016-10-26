@@ -52,7 +52,7 @@ class User(db.Model, UserMixin):
 class Post(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
-    date_posted = db.Column(db.Date, nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False)
     username = db.Column(db.String(120), nullable=False)
     page = db.Column(db.String(12), nullable=False)
     viewed = db.Column(db.Integer, nullable=False, default=0)
@@ -61,9 +61,8 @@ class Post(db.Model):
     price = db.Column(db.Integer, nullable=False, default=0)
     
     image_ext = db.Column(db.String(240), default='/static/images/no-photo.png')
-    bedrooms = db.Column(db.Integer())
-    bathrooms = db.Column(db.Integer())
-    parking = db.Column(db.Integer())
+    bedrooms = db.Column(db.String(6))
+    bathrooms = db.Column(db.String(6))
     sqft = db.Column(db.Integer())
     year = db.Column(db.Integer())
 

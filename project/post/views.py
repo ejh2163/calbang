@@ -6,9 +6,9 @@ from flask_sqlalchemy import *
 post_blueprint = Blueprint('post', __name__, template_folder='templates')
 
 
-@post_blueprint.route('/<page>')
-def posts(page):
-    posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).limit(100).all()
+@post_blueprint.route('/<page>/<int:page_num>')
+def posts(page, page_num):
+    posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).offset((page_num-1)*(24)).limit(24).all()
     return render_template('/posts.html', posts=posts, page=page)
     
 @post_blueprint.route('/view/<int:post_id>')

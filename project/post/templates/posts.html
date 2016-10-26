@@ -1,6 +1,8 @@
 {% extends 'index.html' %}
 
 {% block content %}
+
+
 <div class="row">
     {% for post in posts: %}
         <div class="col-xs-6 col-sm-3 col-md-3">
@@ -15,26 +17,34 @@
                         <img src="{{ post.image_ext }}" />
                     {% endif %}
                 </a>
-                
                 <div class="card-content">
                     <p class="card-title ellipsis">
                         <a href="">{{ post.subject }}</a>
                     </p>
-                    
                     <p class="card-desc-1 ellipsis">
-                        {{ post.bedrooms }} 방 •
+                        {% if post.bedrooms=='studio': %}
+                            Studio •
+                        {% else: %}
+                            {{ post.bedrooms }} 방 •
+                        {% endif %}
                         {{ post.bathrooms }} 화 •
-                        {{ post.parking }} 파킹
+                        {{ '{:,}'.format(post.sqft) }} sqft.
                     </p>
-
                     <p class="card-desc-2 ellipsis">
                         {{ '$ {:,}'.format(post.price) }}
+                        
+                        <span class="card-desc-3 ellipsis">
+                            {% if page in ['rent','homestay']: %}
+                                /월
+                            {% elif page=='bnb': %}
+                                /1박
+                            {% endif %}
+                        </span>
                     </p>
                 </div>
-
                 <div class="card-read-more ellipsis">
-                    <p style="float:left;">{{ post.date_posted }}</p>
-                    <p style="float:right; font-style:italic;">{{ post.username }}</p>
+                    <p style="float:left;">{{ post.date_posted.date() }}</p>
+                    <p style="text-align:right;">{{ post.username }}</p>
                 </div>
             </div>
         </div>
