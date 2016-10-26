@@ -3,18 +3,6 @@ from wtforms import (BooleanField, TextField, HiddenField, PasswordField,
     DateTimeField, validators, IntegerField, SubmitField)
 from wtforms.fields.html5 import EmailField
 
-'''
-self.date_posted = date_posted
-        self.username = current_user.username
-        self.page = page
-        self.viewed = viewed
-        
-        self.subject = subject
-        self.body = body
-        self.price = price
-        
-        self.image_ext = image_ext
-'''
 
 class EditForm(FlaskForm):  
     subject = TextField('subject', [
