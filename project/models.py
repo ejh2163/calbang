@@ -58,16 +58,17 @@ class Post(db.Model):
     viewed = db.Column(db.Integer, nullable=False, default=0)
     subject = db.Column(db.String(120), nullable=False)
     body = db.Column(db.Text)
-    price = db.Column(db.Integer, nullable=False, default=0)
-    
+    price = db.Column(db.Integer)
     image_ext = db.Column(db.String(240), default='/static/images/no-photo.png')
     bedrooms = db.Column(db.String(6))
     bathrooms = db.Column(db.String(6))
+    parking = db.Column(db.String(6))
     sqft = db.Column(db.Integer())
     year = db.Column(db.Integer())
-
+    region = db.Column(db.String(24))
+    
     def __init__(self, date_posted, username, page, viewed, subject, body, price, 
-                image_ext, bedrooms, bathrooms, parking, sqft, year):
+                image_ext, bedrooms, bathrooms, parking, sqft, year, region):
         self.date_posted = date_posted
         self.username = current_user.username
         self.page = page
@@ -75,13 +76,13 @@ class Post(db.Model):
         self.subject = subject
         self.body = body
         self.price = price
-        
         self.image_ext = image_ext
         self.bedrooms = bedrooms
         self.bathrooms = bathrooms
         self.parking = parking
         self.sqft = sqft
         self.year = year
+        self.region = region
         
     def __repr__(self):
         return '<%>' % self.subject

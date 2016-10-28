@@ -14,12 +14,13 @@ body{
     background-color: #f6f6f6;
     font-family: Raleway, arial;
 }
-p, span {
+p, span{
     margin: 0px;
     padding: 0px;
 }
-hr {
-    border-bottom: 1px solid #d4d4d4;
+hr{
+    margin: 6px;
+    border-top: 1px solid #d4d4d4;
 }
 .clear{
     clear: both;
@@ -29,7 +30,7 @@ hr {
 }
 .content{
     min-height: 660px;
-    margin-top: 66px;
+    margin-top: 60px;
 }
 .heading-box{
     margin: 3px 0px 3px 0px;
@@ -42,25 +43,8 @@ hr {
     transform: translateY(-50%);
     margin: 0px;
     color: #444444;
-    font-size: 20px;
-    font-weight: bold;
-}
-.sub-heading-box{
-    margin: 3px 0px 3px 0px;
-    height: 42px;
-}
-.sub-heading{
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0px;
-    color: #444444;
     font-size: 16px;
     font-weight: bold;
-}
-.tray-box{
-    margin: 3px 0px 3px 0px;
-    height: 60px;
 }
 .pagination-nav{
     text-align: center;
@@ -72,6 +56,9 @@ hr {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+.btn, .input-group-btn{
+    border-radius: 0px;
 }
 
 /* navbar CSS */
@@ -109,6 +96,9 @@ hr {
 }
 
 /* card page CSS */
+.filter-select{
+    margin: 6px 0px 6px 0px;
+}
 .btn-edit{
     float: right;
     position: relative;
@@ -130,20 +120,10 @@ hr {
     background-color: #0066CD;
     color: #FFFFFF;
 }
-.filter-box{
-    display: block;
-    margin: 3px -12px 3px -12px;
-    border-radius: 5px;
-    border: 1px solid #D4D4D4;
-}
-.filter-box a{
-    font-weight: bold;
-    color: #6c6c6c;
-}
 .card {
     display: block;
     position: relative;
-    margin: 3px -12px 3px -12px;
+    margin: 6px 0px 6px 0px;
     height: 255px;
     background-color: #ffffff;
     border-radius: 0px;
@@ -196,7 +176,8 @@ hr {
 }
 .card-desc-1 {
     padding: 0px 6px 3px 6px;
-    font-size: 14px;
+    font-weight: bold;
+    font-size: 13px;
 }
 .card-desc-2 {
     padding: 9px 6px 3px 6px;
@@ -209,7 +190,7 @@ hr {
     font-weight: normal;
 }
 .card-read-more {
-    padding: 1px 6px 3px 6px;
+    padding: 2px 6px 3px 6px;
     border-top: 1px solid #D4D4D4;
     color: #757575;
     font-size: 11px;
@@ -271,19 +252,19 @@ hr {
 @media only screen and (max-width : 991px) {
 /* only size 'sm' and below */
     .img-card {
-        height: 116px;
+        height: 115px;
     }
     .img-card img{
-        height: 116px;
+        height: 115px;
     }
     .card{
-        height: 216px;
+        height: 217px;
     }
     .card-title {
         font-size: 13px;
     }
     .card-desc-1 {
-        font-size: 13px;
+        font-size: 12px;
     }
     .card-desc-2 {
         font-size: 16px;

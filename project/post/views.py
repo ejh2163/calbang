@@ -1,6 +1,7 @@
 from flask import Flask, flash, request, render_template, redirect, session, url_for, Blueprint
 from project.models import Post
 from flask_sqlalchemy import *
+from project import db
 
 
 post_blueprint = Blueprint('post', __name__, template_folder='templates')
@@ -8,9 +9,10 @@ post_blueprint = Blueprint('post', __name__, template_folder='templates')
 
 @post_blueprint.route('/<page>/<int:page_num>', methods=['GET'])
 def posts(page, page_num):
-    posts = 1
-    #posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).offset((page_num-1)*(24)).limit(24).all()
-    return render_template('/posts.html', posts=posts, page=page, page_num=page_num)
+    posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).offset((page_num-1)*(24)).limit(24).all()
+    regions = db.session.query(Post.region.distinct().label('region')).filter(Post.page==page).order_by(Post.region).limit(120).all()
+    return render_template('/posts.html', page=page, page_num=page_num, 
+                                        posts=posts, regions=regions)
     
 @post_blueprint.route('/view/<int:post_id>')
 def view(post_id):
@@ -18,6 +20,9 @@ def view(post_id):
 
 @post_blueprint.route('/<page>/edit', methods=['GET', 'POST'])
 def edit(page):
+    
+    form = EditForm()
+    
     if request.method == 'GET':
         return render_template('/edit.html', page=page)
     elif request.method == 'POST':

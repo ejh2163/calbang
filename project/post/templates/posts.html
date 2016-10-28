@@ -2,5 +2,93 @@
 
 {% block content %}
 
+<div class="row">
+    <div class="col-xs-24">
+        <!-- START class filter-box -->
+            <div class="row">
+                <div class="filter-select col-xs-12 col-sm-3">
+                    <select class="selectpicker" data-width="100%">
+                        <option title="방 0+">0+</option>
+                        <option title="방 1+">1+</option>
+                        <option title="방 2+">2+</option>
+                        <option title="방 3+">3+</option>
+                        <option title="방 4+">4+</option>
+                    </select>
+                </div>
+                <div class="filter-select col-xs-12 col-sm-3">
+                    <select class="selectpicker" data-width="100%">
+                        <option title="화장실 0+">0+</option>
+                        <option title="화장실 1+">1+</option>
+                        <option title="화장실 2+">2+</option>
+                        <option title="화장실 3+">3+</option>
+                        <option title="화장실 4+">4+</option>
+                    </select>
+                </div>
+                <div class="filter-select col-xs-24 col-sm-6">
+                    <select class="selectpicker" title="지역" data-width="100%">
+                        {% for region in regions: %}
+                            <option>{{ region.region }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div><!-- END class row -->
+        <!-- END class filter-box -->
+    </div><!-- END class grid -->
+</div><!-- END class row -->
+<hr>
+<div class="row">
+    {% for post in posts: %}
+    <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="card fade-in">
+            <div class="views-tag">
+                <i class="fa fa-eye" aria-hidden="true"></i>&nbsp{{ post.viewed }}
+            </div>
+            <a class="img-card" href="">
+                {% if not post.image_ext: %}
+                    <img src="{{ url_for('static', filename='images/no-photo.png') }}" />
+                {% else %}
+                    <img src="{{ post.image_ext }}" />
+                {% endif %}
+            </a>
+            <div class="card-content">
+                <p class="card-title ellipsis">
+                    <a href="">{{ post.subject }}</a>
+                </p>
+                <p class="card-desc-1 ellipsis">
+                    {% if post.bedrooms=='studio': %}
+                        스튜디오 •
+                    {% else: %}
+                        방 {{ post.bedrooms }} •
+                    {% endif %}
+                    
+                    화 {{ post.bathrooms }} •
+                    
+                    {% if post.parking==None or post.parking: %}
+                        주차 --
+                    {% else: %}
+                        주차 {{ post.parking }}
+                    {% endif %}
+                </p>
+                <p class="card-desc-2 ellipsis">
+                    {{ '${:,}'.format(post.price) }}
+                    <span class="card-desc-3 ellipsis">
+                        {% if page in ['rent','homestay']: %}
+                            /월
+                        {% elif page=='bnb': %}
+                            /일
+                        {% elif page=='realestate': %}
+                            {{ '{:,}'.format(post.sqft) }} sqft.
+                        {% endif %}
+                    </span>
+                </p>
+            </div>
+            <div class="card-read-more ellipsis">
+                <p style="float:left;"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ post.region }}</p>
+                <p style="float:right;">{{ post.date_posted.date() }}</p>
+            </div>
+        </div><!-- END class card -->
+    </div><!-- END class grid -->
+    {% endfor %}
+</div><!-- END class row -->
 
 {% endblock %}
