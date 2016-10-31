@@ -4,22 +4,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <script src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"   integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk="   crossorigin="anonymous"></script>
-    <script src="https://use.fontawesome.com/573e1939a9.js"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap-select.min.js') }}"></script>
-    <script>
-        $(document).ready(function(){ 
-            $('.fade-in').hide().fadeIn();
-        });
-    </script>
+    <script src="https://use.fontawesome.com/573e1939a9.js"></script>
     
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     
+    <script>
+        $(document).ready(function(){ 
+            $('.fade-in').hide().fadeIn();
+            $('#rangeslider').slider({
+                range: true,
+                min: 0,
+                max: {{ price_max }},
+                values: [0, {{ price_max }}],
+                slide: function( event, ui ) {
+                    $('#rangeval').html("$"+ui.values[0]+" ~ $"+ui.values[1]);
+                }
+            });
+        });
+    </script>
+
     <script src='https://www.google.com/recaptcha/api.js'></script>
     
     <title>Title Static</title>

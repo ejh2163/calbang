@@ -3,13 +3,9 @@
 
 
 {% block content %}
-
-<div class='content'>
-    <a href="{{ url_for('edit', category='homestay') }}">+WRITE BUSINESS</a>
-    <a href="{{ url_for('edit', category='cars') }}">+WRITE CARS</a>
-    <a href="{{ url_for('edit', category='homes') }}">+WRITE HOMES</a>
-    <a href="{{ url_for('edit', category='jobs') }}">+WRITE JOBS</a>
-    <a href="{{ url_for('edit', category='sale') }}">+WRITE SALE</a>
+<div class="row">
+    <div class="col-xs-24">
+        this is edit page for {{ page }}
+    </div>
 </div>
-
 {% endblock %}
