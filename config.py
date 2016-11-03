@@ -1,4 +1,4 @@
-
+import os
 
 class Config(object):
     DEBUG = False
@@ -13,4 +13,4 @@ class DevConfig(Config):
     
 class ProdConfig(Config):
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = 'mysql://b98b70c7cb0dfc:619f903a@us-cdbr-iron-east-04.cleardb.net/heroku_c328439fbe5b4da?reconnect=true'
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
