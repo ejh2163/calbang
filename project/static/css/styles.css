@@ -1,16 +1,12 @@
 
 @font-face {
-    font-family: nanumpenscript;
-    src: url(../fonts/NanumPenScript-Regular.ttf);
-}
-@font-face {
-    font-family: nanumgothic;
-    src: url(../fonts/NanumGothic-Bold.ttf);
+    font-family: hanna;
+    src: url(../fonts/BM-HANNA.ttf);
 }
 html,
 body{
     min-height: 100%;
-    background-color: #f6f6f6;
+    background-color: #FFFFFF;
     font-family: Raleway, arial;
 }
 p, span{
@@ -20,6 +16,7 @@ p, span{
 hr{
     margin: 6px 0px 6px 0px;
     border-top: 1px solid #d4d4d4;
+    box-shadow: 0 1px 1px 0px rgba(0,0,0,0.1);
 }
 .clear{
     clear: both;
@@ -45,12 +42,6 @@ hr{
     font-size: 16px;
     font-weight: bold;
 }
-.pagination-nav{
-    text-align: center;
-}
-.pagination>li.active>a{
-    background-color: #0066CD;
-}
 .ellipsis{
     overflow: hidden;
     white-space: nowrap;
@@ -70,12 +61,9 @@ hr{
     border-bottom: 0px;
     box-shadow: 0 3px 6px -1px rgba(0,0,0,0.3);
 }
-.navbar-brand{
-    background-color: #0066CD;
-}
 .navbar-brand span{
-    color: #FFFFFF;
-    font-family: nanumpenscript; 
+    color: #0066CD;
+    font-family: hanna;
     font-size: 24px;
     font-weight: normal;
 }
@@ -101,14 +89,14 @@ hr{
 /* card page CSS */
 /*******************/
 .filter-select{
-    margin: 1px 0px 6px 0px;
+    margin: 3px 0px 6px 0px;
     font-weight:bold;
 }
 .ui-slider {
     height: 15px;
-    width: 93.5%;
+    width: 93.75%;
     left: 3%;
-    margin: 2px 0px 6px 0px;
+    margin: 3px 0px 3px 0px;
 }
 .ui-slider .ui-slider-handle {
     height: 21px;
@@ -120,18 +108,6 @@ hr{
 .form-control-select{
     border-radius: 4px;
     text-align: left;
-}
-.btn-to-edit{
-    margin: 6px 0px 6px 0px;
-    width: 100%;
-    border: none;
-    background-color: #0066CD;
-    font-weight: bold;
-    color: #ffffff;
-}
-.btn-to-edit:hover{
-    color: #ffffff;
-    background-color: #004081;
 }
 .card {
     display: block;
@@ -147,7 +123,7 @@ hr{
 .card:hover {
     box-shadow: 0 2px 6px 0px rgba(0,0,0,0.3);
 }
-.views-tag {
+.card-viewed {
     position:absolute;
     right: 6px;
     top: 6px;
@@ -157,8 +133,8 @@ hr{
     padding: 1px 5px 1px 5px;
     color: #FFFFFF;
     font-size: 11px;
-} /*http://stackoverflow.com/questions/17342315/mysql-increase-value-when-button-is-clicked*/
-.img-card {
+}
+.card-img {
     width: 100%;
     height: 147px;
     border-top-left-radius:0px;
@@ -167,7 +143,7 @@ hr{
     display:block;
     overflow: hidden;
 }
-.img-card img{
+.card-img img{
     width: 100%;
     height: 147px;
     object-fit: cover;
@@ -176,43 +152,84 @@ hr{
 .card-content{
     text-align: left;
 }
-.card-title {
-    padding: 6px 6px 3px 6px;
+.card-subject {
+    margin: 6px 0px 3px 0px;
+    padding: 0px 6px 0px 6px;
     font-weight: bold;
     font-size: 14px;
 }
-.card-title a {
+.card-subject a {
     color: #0066CD;
 }
 .card-title a:hover{
     color: #004081;
     text-decoration: none;
 }
-.card-desc-1 {
-    padding: 0px 6px 3px 6px;
+.card-body-1 {
+    margin: 3px 0px 3px 0px;
+    padding: 0px 6px 0px 6px;
     font-weight: bold;
     font-size: 13px;
 }
-.card-desc-2 {
-    padding: 9px 6px 3px 6px;
+.card-body-2 {
+    margin: 12px 0px 3px 0px;
+    padding: 0px 6px 0px 6px;
     color: #444444;
     font-weight: bold;
     font-size: 18px;
 }
-.card-desc-3 {
+.card-body-3 {
     font-size: 13px;
     font-weight: normal;
 }
 .card-read-more {
-    padding: 2px 6px 3px 6px;
+    margin: 3px 0px 3px 0px;
+    padding: 1px 6px 0px 6px;
     border-top: 1px solid #D4D4D4;
     color: #757575;
-    font-size: 11px;
+    font-size: 12px;
 }
 .card-premium-empty a{
     font-weight: bold;
     position: relative;
     top: 35%;
+}
+.pagination{
+    margin: 12px 0px 6px 0px;
+}
+.pagination-centered {
+    text-align: center;
+}
+.pagination>li.active>a{
+    background-color: #0066CD;
+}
+.btn-to-edit{
+    margin: 6px 0px 12px 0px;
+    width: 100%;
+    border: none;
+    background-color: #0066CD;
+    font-weight: bold;
+    color: #ffffff;
+}
+.btn-to-edit:hover{
+    color: #ffffff;
+    background-color: #004081;
+}
+
+/*******************/
+/* view pages CSS */
+/*******************/
+.view-subject{
+    
+}
+.view-body{
+    
+}
+.view-stat-title{
+    
+}
+.view-stat{
+    
 }
 
 /*******************/
@@ -271,32 +288,38 @@ hr{
 
 @media only screen and (max-width : 991px) {
 /* only size 'sm' and below */
-    .img-card {
+    /* card page media CSS */
+    .card-img {
         height: 115px;
     }
-    .img-card img{
+    .card-img img{
         height: 115px;
     }
     .card{
         height: 216px;
     }
-    .card-title {
+    .card-subject {
         font-size: 13px;
     }
-    .card-desc-1 {
+    .card-body-1 {
         font-size: 12px;
     }
-    .card-desc-2 {
+    .card-body-2 {
         font-size: 16px;
     }
-    .card-desc-3 {
+    .card-body-3 {
         font-size: 12px;
     }
     .card-read-more {
-        font-size: 10px;
+        font-size: 11px;
     }
     .card-premium-empty a{
         font-size: 13px;
+    }
+    
+    /* view page media CSS */
+    .view-img {
+        height: 120px;
     }
 }
 @media only screen and (max-width : 767px) {

@@ -12,13 +12,12 @@ user_blueprint = Blueprint('user', __name__, template_folder='templates')
 
 @user_blueprint.route('/register', methods=['GET', 'POST'])
 def register():
-    page='register'
+    page = 'register'
     if current_user.is_authenticated:
         flash('이미 로그인된 상태입니다.')
         return redirect(url_for('home.home'))
     
     form = RegisterForm()
-    
     if request.method == 'POST':
         if form.validate_on_submit():
             if User.is_email_taken(form.email.data):
@@ -39,7 +38,6 @@ def register():
                 # commented until email verification is set up: return redirect(url_for('user.verify'))
                 login_user(new_user)
                 return redirect(url_for('home.home'))
-                
             return render_template('/register.html', form=form, page=page)
         else:
             return render_template('/register.html', form=form, page=page)
@@ -52,13 +50,12 @@ def verify():
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
-    page='login'
+    page = 'login'
     if current_user.is_authenticated:
         flash('이미 로그인된 상태입니다.')
         return redirect(url_for('home.home'))
     
     form = LoginForm()
-    
     if request.method == 'POST':
         if form.validate_on_submit():
             user, authenticated = User.authenticate(form.username.data, form.password.data)

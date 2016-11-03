@@ -3,7 +3,11 @@
 {% block content %}
 <div class='row'>
     <div class="col-md-8 col-md-offset-8 fade-in">
-        <h3 style="text-align:center;">Welcome Back!</h3>
+        <div class="row">
+            <div class="col-md-24">
+                <img style="width:100%" src="{{ url_for('static', filename='images/logo2.png') }}" />
+            </div>
+        </div>
         <form method="post" action="" accept-charset="UTF-8">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <br />
@@ -29,7 +33,6 @@
             </div>
         </form>
         <hr>
-        <br />
         <div class="text-center" style="font-size:12px">
             <p><a href="/reset">아이디 찾기</a>&nbsp | &nbsp<a href="/reset">비밀번호 변경</a></p>
             <br />

@@ -5,7 +5,17 @@
 {% block content %}
 <div class="row">
     <div class="col-xs-24">
-        {{ post.id }}
+        <h3>{{ post.subject }}</h3>
+        {{ post.body }}
     </div><!-- END class grid -->
+    <div class="col-xs-24">
+        <div class="fotorama"
+               data-width="100%" 
+               data-ratio="1.55">
+            <img src="{{ url_for('static', filename='images/no-photo.png') }}" />
+            <img src="{{ url_for('static', filename='images/no-photo.png') }}" />
+        </div>
+    </div>
+    
 </div><!-- END class row -->
 {% endblock %}

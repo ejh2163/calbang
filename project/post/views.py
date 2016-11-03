@@ -3,6 +3,7 @@ from project.models import Post
 from flask_sqlalchemy import *
 from project import db
 import math
+import datetime
 
 from .edit_forms import EditForm
 
@@ -17,14 +18,15 @@ def posts(page, page_num):
     
     regions = db.session.query(Post.region.distinct().label('region')).filter(Post.page==page).order_by(Post.region).limit(120).all()
     
-    posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).offset((page_num-1)*(24)).limit(24).all()
+    posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).offset((page_num-1)*(12)).limit(12).all()
     return render_template('/posts.html', 
                             page=page, 
                             page_num=page_num, 
                             price_min=price_min, 
                             price_max=price_max, 
                             regions=regions, 
-                            posts=posts
+                            posts=posts,
+                            today=datetime.datetime.now()
                             )
     
 @post_blueprint.route('/view/<int:post_id>')
