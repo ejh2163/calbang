@@ -15,10 +15,12 @@ post_blueprint = Blueprint('post', __name__, template_folder='templates')
 def posts(page, page_num):
     price_min = db.session.query(db.func.min(Post.price)).filter(Post.page==page).scalar()
     price_max = db.session.query(db.func.max(Post.price)).filter(Post.page==page).scalar()
+    if price_max == None:
+        price_max = 0
     
-    regions = db.session.query(Post.region.distinct().label('region')).filter(Post.page==page).order_by(Post.region).limit(120).all()
+    regions = db.session.query(Post.region.distinct().label('region')).filter(Post.page==page).order_by(Post.region).limit(100).all()
     
-    posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).offset((page_num-1)*(12)).limit(12).all()
+    posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).offset((page_num-1)*(18)).limit(18).all()
     return render_template('/posts.html', 
                             page=page, 
                             page_num=page_num, 
@@ -29,12 +31,15 @@ def posts(page, page_num):
                             today=datetime.datetime.now()
                             )
     
-@post_blueprint.route('/view/<int:post_id>')
-def view(post_id):
+@post_blueprint.route('/<page>/view/<int:post_id>')
+def view(page, post_id):
     post = Post.query.filter(Post.id==post_id).first()
     post.viewed += 1
     db.session.commit()
-    return render_template('/view.html', post=post)
+    return render_template('/view.html', 
+                            page=page,
+                            post=post,
+                            )
 
 @post_blueprint.route('/<page>/edit', methods=['GET', 'POST'])
 def edit(page):

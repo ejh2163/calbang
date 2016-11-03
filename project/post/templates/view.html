@@ -3,19 +3,61 @@
 
 
 {% block content %}
+<hr>
 <div class="row">
     <div class="col-xs-24">
-        <h3>{{ post.subject }}</h3>
-        {{ post.body }}
-    </div><!-- END class grid -->
+        <h1 class="view-subject ellipsis">{{ post.subject }}</h2>
+        <h2>{{ '${:,}'.format(post.price) }}
+            <span style="font-size:16px;">
+                {% if page in ['rent','homestay']: %}
+                    /월
+                {% elif page=='bnb': %}
+                    /일
+                {% endif %}
+            </span>
+        </h2>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-6">
+                <div class="contact-box">
+                    <p class="contact-title">전화: </p>
+                    <p class="contact-title">이메일: </p>
+                    <p class="contact-title">카톡: </p>
+                </div>
+            </div>
+            <div class="col-xs-24 col-sm-18">
+                <div class="stats-box">
+                    <div class="row">
+                    <div class="col-xs-11">
+                        <p class="view-stat-title">방: <span class="view-stat">{% if post.bedrooms=='studio': %} 스튜디오 {% else: %} {{ post.bedrooms }} {% endif %}</span></p>
+                        <p class="view-stat-title">화장실: <span class="view-stat">{{ post.bathrooms }}</span></p>
+                        <p class="view-stat-title">주차: <span class="view-stat">{% if post.parking==None: %} -- {% else: %} {{ post.parking }} {% endif %}</span></p>
+                    </div>
+                    <div class="col-xs-13">
+                        <p class="view-stat-title">지역: <span class="view-stat">{{ post.region }}</span></p>
+                        <p class="view-stat-title">면적: <span class="view-stat">{% if post.sqft==None: %} -- {% else: %} {{ post.sqft }} {% endif %} sqft.</span></p>
+                        <p class="view-stat-title">년도: <span class="view-stat">{% if post.year==None: %} -- {% else: %} {{ post.year }} {% endif %}</span></p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="view-body">
+            {{ post.body }}
+        </div>
+    </div><!-- END class desc grid -->
+</div><!-- END class desc row -->
+
+<div class="row">
     <div class="col-xs-24">
         <div class="fotorama"
                data-width="100%" 
-               data-ratio="1.55">
+               data-ratio="1.55"
+               data-nav="thumbs">
             <img src="{{ url_for('static', filename='images/no-photo.png') }}" />
             <img src="{{ url_for('static', filename='images/no-photo.png') }}" />
-        </div>
-    </div>
-    
+        </div><!-- END class fotorama -->
+    </div><!-- END class fotorama grid -->
 </div><!-- END class row -->
 {% endblock %}

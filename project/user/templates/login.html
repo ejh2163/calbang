@@ -2,10 +2,12 @@
 
 {% block content %}
 <div class='row'>
-    <div class="col-md-8 col-md-offset-8 fade-in">
+    <div class="col-xs-20 col-xs-offset-2 col-sm-12 col-sm-offset-6 col-md-8 col-md-offset-8 fade-in">
         <div class="row">
-            <div class="col-md-24">
-                <img style="width:100%" src="{{ url_for('static', filename='images/logo2.png') }}" />
+            <div class="col-xs-24">
+                <br/>
+                <img style="width:100%;" src="{{ url_for('static', filename='images/logo-login.png') }}" />
+                <img style="width:100%;" src="{{ url_for('static', filename='images/logo-under.png') }}" />
             </div>
         </div>
         <form method="post" action="" accept-charset="UTF-8">
@@ -33,7 +35,7 @@
             </div>
         </form>
         <hr>
-        <div class="text-center" style="font-size:12px">
+        <div class="user-guide text-center">
             <p><a href="/reset">아이디 찾기</a>&nbsp | &nbsp<a href="/reset">비밀번호 변경</a></p>
             <br />
             <p>아직 아이디가 없으세요?</p>

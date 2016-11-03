@@ -3,6 +3,10 @@
     font-family: hanna;
     src: url(../fonts/BM-HANNA.ttf);
 }
+@font-face {
+    font-family: jejugothic;
+    src: url(../fonts/JejuGothic-Regular.ttf);
+}
 html,
 body{
     min-height: 100%;
@@ -113,7 +117,7 @@ hr{
     display: block;
     position: relative;
     margin: 6px 0px 6px 0px;
-    height: 255px;
+    height: 288px;
     background-color: #ffffff;
     border-radius: 0px;
     border: 1px solid #d4d4d4;
@@ -129,14 +133,14 @@ hr{
     top: 6px;
     background-color: #444444;
     border-radius: 3px;
-    opacity: 0.80;
-    padding: 1px 5px 1px 5px;
+    opacity: 0.75;
+    padding: 1px 4px 1px 4px;
     color: #FFFFFF;
     font-size: 11px;
 }
 .card-img {
     width: 100%;
-    height: 147px;
+    height: 180px;
     border-top-left-radius:0px;
     border-top-right-radius:0px;
     border-bottom: 1px solid #d4d4d4;
@@ -145,7 +149,7 @@ hr{
 }
 .card-img img{
     width: 100%;
-    height: 147px;
+    height: 180px;
     object-fit: cover;
     transition: all .25s ease;
 }
@@ -220,30 +224,61 @@ hr{
 /* view pages CSS */
 /*******************/
 .view-subject{
-    
+    margin: 12px 0px 6px 0px;
+    font-size: 24px;
+    font-weight: bold;
 }
-.view-body{
-    
+.contact-box{
+    margin: 6px 0 6px 0;
+    padding: 3px 6px 3px 6px;
+    background-color: #D2E6F6;
+    box-shadow: 0 2px 3px 0px rgba(0,0,0,0.2);
+}
+.contact-title{
+    margin: 3px 0 1px 0;
+    font-family: jejugothic;
+    font-size: 14px;
+    font-weight: bold;
+}
+.stats-box{
+    margin: 6px 0 6px 0;
+    padding: 3px 6px 3px 6px;
+    background-color: #eeeeee;
+    box-shadow: 0 2px 3px 0px rgba(0,0,0,0.2);
 }
 .view-stat-title{
-    
+    margin: 3px 0 1px 0;
+    font-family: jejugothic;
+    font-size: 14px;
+    font-weight: bold;
 }
 .view-stat{
-    
+    font-size: 14px;
+    font-weight: normal;
+}
+.view-body{
+    margin: 6px 0px 9px 0px;
+    font-size: 14px;
+}
+.fotorama{
+    margin-top: 9px;
+    padding: 1px;
+    border: 1px solid #D4D4D4;
+    box-shadow: 0 2px 3px 0px rgba(0,0,0,0.2);
 }
 
 /*******************/
-/* sign pages CSS */
+/* user pages CSS */
 /*******************/
-.sign-attr-text{
-    margin: 0px 6px 0px 3px;
-    color: #787878;
-    font-size: 13px;
-}
 .btn-sign{
     color: #ffffff;
     border: 0px;
     background-color: #0066CD;
+}
+.user-guide{
+    margin-top: 12px;
+    text-align: center;
+    font-size: 12px;
 }
 
 /*******************/
@@ -290,13 +325,13 @@ hr{
 /* only size 'sm' and below */
     /* card page media CSS */
     .card-img {
-        height: 115px;
+        height: 120px;
     }
     .card-img img{
-        height: 115px;
+        height: 120px;
     }
     .card{
-        height: 216px;
+        height: 219px;
     }
     .card-subject {
         font-size: 13px;
@@ -305,7 +340,7 @@ hr{
         font-size: 12px;
     }
     .card-body-2 {
-        font-size: 16px;
+        font-size: 15px;
     }
     .card-body-3 {
         font-size: 12px;
@@ -318,8 +353,14 @@ hr{
     }
     
     /* view page media CSS */
-    .view-img {
-        height: 120px;
+    .view-subject{
+        font-size: 20px;
+    }
+    .view-stat-title{
+        font-size: 13.5px;
+    }
+    .view-stat{
+        font-size: 13.5px;
     }
 }
 @media only screen and (max-width : 767px) {

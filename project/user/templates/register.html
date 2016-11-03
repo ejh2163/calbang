@@ -2,10 +2,12 @@
 
 {% block content %}
 <div class='row'>
-    <div class="col-md-8 col-md-offset-8 fade-in">
+    <div class="col-xs-20 col-xs-offset-2 col-sm-12 col-sm-offset-6 col-md-8 col-md-offset-8 fade-in">
         <div class="row">
             <div class="col-md-24">
-                <img style="width:100%" src="{{ url_for('static', filename='images/logo2.png') }}" />
+                <br/>
+                <img style="width:100%;" src="{{ url_for('static', filename='images/logo-register.png') }}" />
+                <img style="width:100%;" src="{{ url_for('static', filename='images/logo-under.png') }}" />
             </div>
         </div>
         <br />
@@ -47,7 +49,7 @@
             </div>
         </form>
         <hr>
-        <div class="text-center" style="font-size:12px">
+        <div class="user-guide text-center">
             <p>이미 회원이세요?</p>
             <a href="/login">로그인하기</a>
         </div>
