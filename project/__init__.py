@@ -11,6 +11,9 @@ db.init_app(app)
 
 # flask-login
 login_manager.init_app(app)
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(id)
 
 # flask-wtf
 csrf.init_app(app)
