@@ -13,10 +13,11 @@ if __name__ == "__main__":
     # python run.py
     
     # heroku config
+    # heroku config:set DATABASE_URL='db url goes here'
     # heroku run python migrate.py db migrate
     # heroku run python migrate.py db upgrade
     
     # git add .
-    # git commit -am "msg here"
+    # git commit -am "msg goes here"
     # git push
     # git push heroku master

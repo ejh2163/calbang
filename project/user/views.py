@@ -46,10 +46,6 @@ def register():
     elif request.method == 'GET':
         return render_template('/register.html', form=form, page=page)
 
-@user_blueprint.route('/verify')
-def verify():
-    return render_template('/verify.html')
-
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     page = 'login'
@@ -81,6 +77,17 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home.home'))
+
+
+
+
+@user_blueprint.route('/verify')
+def verify():
+    return render_template('/verify.html')
+
+@user_blueprint.route('/reset')
+def reset():
+    return render_template('/reset.html')
 
 @user_blueprint.route('/profile')
 @login_required
