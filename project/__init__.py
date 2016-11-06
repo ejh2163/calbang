@@ -10,10 +10,7 @@ app.config.from_object(os.environ['APP_SETTINGS'])
 db.init_app(app)
 
 # flask-login
-login_manager.setup_app(app)
-@login_manager.user_loader
-def load_user(id):
-    return User.query.get(id)
+login_manager.init_app(app)
 
 # flask-wtf
 csrf.init_app(app)

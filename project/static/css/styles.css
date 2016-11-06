@@ -30,7 +30,10 @@ hr{
 }
 .content{
     min-height: 660px;
-    margin-top: 56px;
+    margin-top: 60px;
+}
+.alert-style{
+    margin: 6px 0 6px 0;
 }
 .heading-box{
     margin: 3px 0px 3px 0px;
@@ -56,9 +59,9 @@ hr{
 }
 
 
-/*******************/
+/**************************************************/
 /* navbar CSS */
-/*******************/
+/**************************************************/
 .navbar-custom {
     background-color: #ffffff;
     border-radius: 0px;
@@ -89,9 +92,9 @@ hr{
     color: #0066CD;
 }
 
-/*******************/
+/**************************************************/
 /* card page CSS */
-/*******************/
+/**************************************************/
 .filter-select{
     margin: 3px 0px 6px 0px;
     font-weight:bold;
@@ -220,58 +223,61 @@ hr{
     background-color: #004081;
 }
 
-/*******************/
+/**************************************************/
 /* view pages CSS */
-/*******************/
+/**************************************************/
 .view-subject{
-    margin: 12px 0px 6px 0px;
+    margin: 12px 0px 12px 0px;
     font-size: 24px;
     font-weight: bold;
 }
-.contact-box{
-    margin: 6px 0 6px 0;
-    padding: 3px 6px 3px 6px;
-    background-color: #D2E6F6;
-    box-shadow: 0 2px 3px 0px rgba(0,0,0,0.2);
+.view-box{
+    margin: 3px 0px 3px 0px;
+    padding: 6px 12px 6px 12px;
+    border: 1px solid #eeeeee;
+    box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);
 }
-.contact-title{
-    margin: 3px 0 1px 0;
-    font-family: jejugothic;
+.view-box-price{
+    margin: 6px 0px 6px 0px;
+    color: #444444;
+    font-size: 24px;
+    font-weight: bold;
+}
+.view-box-title{
+    margin: 6px 0 6px 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #0066CD;
+}
+.view-box-corner{
+    float: right;
+    margin: 7px 0 0 0;
+    font-size: 13px;
+    color: #757575;
+}
+.view-box-subtitle{
+    margin: 6px 0 6px 0;
     font-size: 14px;
     font-weight: bold;
 }
-.stats-box{
+.view-box-stat{
     margin: 6px 0 6px 0;
-    padding: 3px 6px 3px 6px;
-    background-color: #eeeeee;
-    box-shadow: 0 2px 3px 0px rgba(0,0,0,0.2);
-}
-.view-stat-title{
-    margin: 3px 0 1px 0;
-    font-family: jejugothic;
-    font-size: 14px;
-    font-weight: bold;
-}
-.view-stat{
+    padding: 0;
     font-size: 14px;
     font-weight: normal;
 }
-.view-body{
-    margin: 6px 0px 9px 0px;
-    font-size: 14px;
-}
 .fotorama{
-    margin-top: 9px;
-    padding: 1px;
-    border: 1px solid #D4D4D4;
-    box-shadow: 0 2px 3px 0px rgba(0,0,0,0.2);
+    margin: 3px 0 3px 0;
+    border: 1px solid #eeeeee;
+    box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);
 }
 
-/*******************/
+/**************************************************/
 /* user pages CSS */
-/*******************/
+/**************************************************/
 .btn-sign{
     color: #ffffff;
+    font-weight: bold;
     border: 0px;
     background-color: #0066CD;
 }
@@ -281,9 +287,9 @@ hr{
     font-size: 12px;
 }
 
-/*******************/
+/**************************************************/
 /* edit page CSS */
-/*******************/
+/**************************************************/
 .modal.modal-wide .modal-dialog {
     width: 90%;
 }
@@ -310,9 +316,9 @@ hr{
     font-size: 13px;
 }
 
-/*******************/
+/**************************************************/
 /* footer CSS */
-/*******************/
+/**************************************************/
 .footer{
     margin-top: 120px;
     padding: 24px;
@@ -323,7 +329,9 @@ hr{
 
 @media only screen and (max-width : 991px) {
 /* only size 'sm' and below */
+    /**************************************************/
     /* card page media CSS */
+    /**************************************************/
     .card-img {
         height: 120px;
     }
@@ -346,20 +354,25 @@ hr{
         font-size: 12px;
     }
     .card-read-more {
-        font-size: 11px;
+        font-size: 10.5px;
     }
     .card-premium-empty a{
         font-size: 13px;
     }
     
+    /**************************************************/
     /* view page media CSS */
+    /**************************************************/
     .view-subject{
         font-size: 20px;
     }
-    .view-stat-title{
+    .view-box-title{
+        font-size: 15px;
+    }
+    .view-box-subtitle{
         font-size: 13.5px;
     }
-    .view-stat{
+    .view-box-stat{
         font-size: 13.5px;
     }
 }

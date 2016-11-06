@@ -1,63 +1,91 @@
 {% extends 'index.html' %}
 
-
-
 {% block content %}
 <hr>
 <div class="row">
     <div class="col-xs-24">
         <h1 class="view-subject ellipsis">{{ post.subject }}</h2>
-        <h2>{{ '${:,}'.format(post.price) }}
-            <span style="font-size:16px;">
-                {% if page in ['rent','homestay']: %}
-                    /월
-                {% elif page=='bnb': %}
-                    /일
-                {% endif %}
-            </span>
-        </h2>
-
-        <div class="row">
-            <div class="col-xs-24 col-sm-6">
-                <div class="contact-box">
-                    <p class="contact-title">전화: </p>
-                    <p class="contact-title">이메일: </p>
-                    <p class="contact-title">카톡: </p>
-                </div>
-            </div>
-            <div class="col-xs-24 col-sm-18">
-                <div class="stats-box">
-                    <div class="row">
-                    <div class="col-xs-11">
-                        <p class="view-stat-title">방: <span class="view-stat">{% if post.bedrooms=='studio': %} 스튜디오 {% else: %} {{ post.bedrooms }} {% endif %}</span></p>
-                        <p class="view-stat-title">화장실: <span class="view-stat">{{ post.bathrooms }}</span></p>
-                        <p class="view-stat-title">주차: <span class="view-stat">{% if post.parking==None: %} -- {% else: %} {{ post.parking }} {% endif %}</span></p>
-                    </div>
-                    <div class="col-xs-13">
-                        <p class="view-stat-title">지역: <span class="view-stat">{{ post.region }}</span></p>
-                        <p class="view-stat-title">면적: <span class="view-stat">{% if post.sqft==None: %} -- {% else: %} {{ post.sqft }} {% endif %} sqft.</span></p>
-                        <p class="view-stat-title">년도: <span class="view-stat">{% if post.year==None: %} -- {% else: %} {{ post.year }} {% endif %}</span></p>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="view-body">
-            {{ post.body }}
-        </div>
-    </div><!-- END class desc grid -->
-</div><!-- END class desc row -->
+    </div><!-- END class grid -->
+</div><!-- END class row -->
 
 <div class="row">
-    <div class="col-xs-24">
+    <div class="col-xs-24 col-sm-16">
         <div class="fotorama"
                data-width="100%" 
                data-ratio="1.55"
                data-nav="thumbs">
-            <img src="{{ url_for('static', filename='images/no-photo.png') }}" />
+            <!-- 
+            {% for image in images: %}
+            {% endfor %}
+            -->
             <img src="{{ url_for('static', filename='images/no-photo.png') }}" />
         </div><!-- END class fotorama -->
     </div><!-- END class fotorama grid -->
+    
+    <div class="col-xs-24 col-sm-8">
+        <div class="view-box">
+            <p class="view-box-price">{{ '${:,}'.format(post.price) }} <span style="font-size:16px;">{{ price_suffix }}</span></p>
+        </div><!-- END class view-box for price -->
+    </div><!-- END class grid -->
+    <div class="col-xs-24 col-sm-8">
+        <div class="view-box">
+            <div class="row">
+                <div class="col-xs-24">
+                    <span class="view-box-corner">등록자: {{ post.username }}</span>
+                    <p class="view-box-title">연락처</p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="view-box-subtitle">전화:</p>
+                    <p class="view-box-subtitle">이메일:</p>
+                    <p class="view-box-subtitle">카카오톡:</p>
+                </div>
+                <div class="col-xs-16">
+                    <p class="view-box-stat">{% if post.phone==None: %} -- {% else: %} {{ post.phone }}} {% endif %}</p>
+                    <p class="view-box-stat">{% if post.email==None: %} -- {% else: %} {{ post.email }}} {% endif %}</p>
+                    <p class="view-box-stat">{% if post.kakaotalk==None: %} -- {% else: %} {{ post.kakaotalk }}} {% endif %}</p>
+                </div>
+            </div>
+        </div><!-- END class contact view-box -->
+    </div><!-- END class grid -->
+    <div class="col-xs-24 col-sm-8">
+        <div class="view-box">
+            <div class="row">
+                <div class="col-xs-24">
+                    <span class="view-box-corner">등록일: {{ post.date_posted.date() }}</span>
+                    <p class="view-box-title">상세정보</p>
+                </div>
+                <div class="col-xs-8">
+                    <p class="view-box-subtitle">방:</p>
+                    <p class="view-box-subtitle">화장실:</p>
+                    <p class="view-box-subtitle">주차:</p>
+                    <p class="view-box-subtitle">지역:</p>
+                    <p class="view-box-subtitle">면적:</p>
+                    <p class="view-box-subtitle">년도:</p>
+                </div>
+                <div class="col-xs-16">
+                    <p class="view-box-stat">{% if post.bedrooms=='studio': %} 스튜디오 {% else: %} {{ post.bedrooms }} {% endif %}</p>
+                    <p class="view-box-stat">{{ post.bathrooms }}</p>
+                    <p class="view-box-stat">{% if post.parking==None: %} -- {% else: %} {{ post.parking }} {% endif %}</p>
+                    <p class="view-box-stat">{{ post.region }}</p>
+                    <p class="view-box-stat">{% if post.sqft==None: %} -- {% else: %} {{ post.sqft }} {% endif %} sqft.</p>
+                    <p class="view-box-stat">{% if post.year==None: %} -- {% else: %} {{ post.year }} {% endif %}</p>
+                </div>
+            </div>
+        </div><!-- END class details view-box -->
+    </div><!-- END class grid -->
+</div><!-- END class row -->
+
+<div class="row">
+    <div class="col-xs-24 col-sm-16">
+        <div class="view-box">
+            <p>{{ post.body }}</p>
+        </div><!-- END class view-box for body -->
+    </div><!-- END class grid -->
+    
+    <div class="col-xs-24 col-sm-8">
+        <div class="view-adspace" style="border:1px solid red; margin:6px 0 6px 0;">
+            
+        </div>
+    </div>
 </div><!-- END class row -->
 {% endblock %}

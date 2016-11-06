@@ -1,9 +1,12 @@
 from flask import Flask, flash, request, render_template, redirect, session, url_for, Blueprint
-from project.models import Post
+from flask_login import login_required
 from flask_sqlalchemy import *
-from project import db
 import math
 import datetime
+
+from project.models import Post
+from project import db
+
 
 from .edit_forms import EditForm
 
@@ -13,14 +16,21 @@ post_blueprint = Blueprint('post', __name__, template_folder='templates')
 
 @post_blueprint.route('/<page>/<int:page_num>', methods=['GET'])
 def posts(page, page_num):
+    # query filter components
     price_min = db.session.query(db.func.min(Post.price)).filter(Post.page==page).scalar()
     price_max = db.session.query(db.func.max(Post.price)).filter(Post.page==page).scalar()
     if price_max == None:
         price_max = 0
-    
     regions = db.session.query(Post.region.distinct().label('region')).filter(Post.page==page).order_by(Post.region).limit(100).all()
     
+    # query post and post components
     posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).offset((page_num-1)*(18)).limit(18).all()
+    price_suffix = ''
+    if page in ['rent','homestay']:
+        price_suffix = '/월'
+    elif page=='bnb':
+        price_suffix = '/일'
+    
     return render_template('/posts.html', 
                             page=page, 
                             page_num=page_num, 
@@ -28,22 +38,33 @@ def posts(page, page_num):
                             price_max=price_max, 
                             regions=regions, 
                             posts=posts,
+                            price_suffix=price_suffix,
                             today=datetime.datetime.now()
                             )
     
 @post_blueprint.route('/<page>/view/<int:post_id>')
 def view(page, post_id):
+    # update post.viewed count
     post = Post.query.filter(Post.id==post_id).first()
     post.viewed += 1
     db.session.commit()
+    
+    price_suffix = ''
+    if page in ['rent','homestay']:
+        price_suffix = '/월'
+    elif page=='bnb':
+        price_suffix = '/일'
+    
     return render_template('/view.html', 
                             page=page,
                             post=post,
+                            price_suffix=price_suffix,
                             )
 
 @post_blueprint.route('/<page>/edit', methods=['GET', 'POST'])
+@login_required
 def edit(page):
-    
+        
     form = EditForm()
     
     return render_template('edit.html', page=page, form=form)

@@ -57,23 +57,33 @@ class Post(db.Model):
     viewed = db.Column(db.Integer, nullable=False, default=0)
     subject = db.Column(db.String(120), nullable=False)
     body = db.Column(db.Text)
+    phone = db.Column(db.String(12))
+    email = db.Column(db.String(120))
+    kakaotalk = db.Column(db.String(30))
+    region = db.Column(db.String(24))
     price = db.Column(db.Integer)
     image_ext = db.Column(db.String(240), default='/static/images/no-photo.png')
+    
     bedrooms = db.Column(db.String(6))
     bathrooms = db.Column(db.String(6))
     parking = db.Column(db.String(6))
     sqft = db.Column(db.Integer())
     year = db.Column(db.Integer())
-    region = db.Column(db.String(24))
     
-    def __init__(self, date_posted, username, page, viewed, subject, body, price, 
-                image_ext, bedrooms, bathrooms, parking, sqft, year, region):
+    
+    def __init__(self, date_posted, username, page, viewed, 
+                subject, body, phone, email, kakaotalk, region, price, image_ext, 
+                bedrooms, bathrooms, parking, sqft, year):
         self.date_posted = date_posted
         self.username = current_user.username
         self.page = page
         self.viewed = viewed
         self.subject = subject
         self.body = body
+        self.phone = phone
+        self.email = email
+        self.kakaotalk = kakaotalk
+        
         self.price = price
         self.image_ext = image_ext
         self.bedrooms = bedrooms

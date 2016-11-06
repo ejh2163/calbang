@@ -21,10 +21,10 @@ class RegisterForm(FlaskForm):
         validators.Length(
             min=3, 
             max=30, 
-            message='3 ~ 30글자로 입력해주세요'), 
+            message='3에서 30이내 글자로 입력해주세요'), 
         validators.Regexp(
-            "^[a-zA-Z0-9]*$", 
-            message="문자나 숫자로만 입력해주세요")
+            "^[a-zA-Z0-9가-힣]*$", 
+            message="한/영 문자나 숫자로만 입력해주세요")
         ])
     email = EmailField('email', [
         validators.Required(message='이메일을 입력해주세요'), 

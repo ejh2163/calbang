@@ -1,9 +1,7 @@
 {% extends 'index.html' %}
 
 {% block content %}
-
 <hr>
-
 <div class="row">
     <!-- START filters -->
     <div class="col-xs-24">
@@ -54,42 +52,21 @@
                 <i class="fa fa-eye" aria-hidden="true"></i>&nbsp{{ post.viewed }}
             </div>
             <a class="card-img" href="/{{ page }}/view/{{ post.id }}">
-                {% if not post.image_ext: %}
-                    <img src="{{ url_for('static', filename='images/no-photo.png') }}" />
-                {% else %}
+                {% if post.image_ext: %}
                     <img src="{{ post.image_ext }}" />
+                {% else %}
+                    <img src="{{ url_for('static', filename='images/no-photo.png') }}" />
                 {% endif %}
             </a>
             <div class="card-content">
-                <p class="card-subject ellipsis">
-                    <a href="/{{ page }}/view/{{ post.id }}">{{ post.subject }}</a>
-                </p>
+                <p class="card-subject ellipsis"><a href="/{{ page }}/view/{{ post.id }}">{{ post.subject }}</a></p>
                 <p class="card-body-1 ellipsis">
-                    {% if post.bedrooms=='studio': %}
-                        스튜디오 •
-                    {% else: %}
-                        방 {{ post.bedrooms }} •
-                    {% endif %}
-                    
+                    {% if post.bedrooms=='studio': %} 스튜디오 • {% else: %} 방 {{ post.bedrooms }} • {% endif %}
                     화 {{ post.bathrooms }} •
-                    
-                    {% if post.parking==None: %}
-                        주차 --
-                    {% else: %}
-                        주차 {{ post.parking }}
-                    {% endif %}
+                    {% if post.parking==None: %} 주차 -- {% else: %} 주차 {{ post.parking }} {% endif %}
                 </p>
-                <p class="card-body-2 ellipsis">
-                    {{ '${:,}'.format(post.price) }}
-                    <span class="card-body-3 ellipsis">
-                        {% if page in ['rent','homestay']: %}
-                            /월
-                        {% elif page=='bnb': %}
-                            /일
-                        {% elif page=='realestate': %}
-                            {{ '{:,}'.format(post.sqft) }} sqft.
-                        {% endif %}
-                    </span>
+                <p class="card-body-2 ellipsis">{{ '${:,}'.format(post.price) }}
+                    <span class="card-body-3">{% if page=='realestate': %} {{ '{:,} sqft.'.format(post.sqft) }} {% endif %} {{ price_suffix }}</span>
                 </p>
             </div>
             <div class="card-read-more ellipsis">
@@ -106,7 +83,6 @@
     <div class="col-xs-24 col-sm-offset-21 col-sm-3">
         <a href="/{{ page }}/edit"><button type="button" class="btn btn-to-edit">등록하기</button></a>
     </div>
-
     <div class="pagination-centered">
         <ul class="pagination">
             {% for num in range(1, 6): %}
@@ -117,5 +93,4 @@
         </ul>
     </div>
 </div>
-
 {% endblock %}
