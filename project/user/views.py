@@ -1,11 +1,12 @@
 from flask import Flask, flash, request, render_template, redirect, session, url_for, Blueprint
 from flask_login import login_required, login_user, current_user, logout_user, confirm_login, login_fresh
-from .user_forms import LoginForm, RegisterForm
 from time import strftime
 
 from project.models import User
-from project import db
-
+from project.user.user_forms import LoginForm, RegisterForm
+from project import db, verify_required
+from project.user.token import generate_confirmation_token, confirm_token
+from project.user.email import send_mail
 
 user_blueprint = Blueprint('user', __name__, template_folder='templates')
 
@@ -35,16 +36,49 @@ def register():
                 db.session.add(new_user)
                 db.session.commit()
                 
-                message = '환영합니다 ' + form.username.data+'님! 가입이 완료되었습니다.'
-                flash(message, 'success')
-                # commented until email verification is set up: return redirect(url_for('user.verify'))
+                # generate token and verify token url
+                token = generate_confirmation_token(new_user)
+                verify_url = url_for('user.verify_email', token=token, _external=True)
+                # create email message and send
+                email_html = render_template('/verify_msg.html', verify_url=verify_url)
+                email_subject = '캘방 계정확인 이메일입니다'
+                send_mail(new_user.email, email_subject, email_html)
+                
+                flash_message = '환영합니다 ' + new_user.username+'님! 계정확인을 위해 이메일을 확인해주세요.'
+                flash(flash_message, 'success')
                 login_user(new_user)
-                return redirect(url_for('home.home'))
+                return redirect(url_for('unverified'))
             return render_template('/register.html', form=form, page=page)
         else:
             return render_template('/register.html', form=form, page=page)
     elif request.method == 'GET':
         return render_template('/register.html', form=form, page=page)
+
+@user_blueprint.route('/verify/<token>')
+@login_required
+def verify_email(token):
+    try:
+        email = confirm_token(token)
+        user = User.query.filter_by(email=email).first_or_404()
+        if user.verified:
+            flash('계정 이메일이 이미 확인되었습니다. 로그인 해주세요.', 'success')
+        else:
+            user.verified = True
+            db.session.add(user)
+            db.session.commit()
+            flash('계정 이메일이 확인되었습니다. 감사합니다!', 'success')
+    except:
+        flash('The confirmation link is invalid or has expired.', 'danger')
+    return redirect(url_for('home.home'))
+
+@user_blueprint.route('/unverified')
+@login_required
+def unverified():
+    if current_user.verified==1:
+        return redirect('home.home')
+    else:
+        flash('계정확인이 먼저 필요합니다. 계정확인을 위해 이메일을 확인해주세요', 'warning')
+        return render_template('/unverified.html')
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
@@ -78,19 +112,13 @@ def logout():
     logout_user()
     return redirect(url_for('home.home'))
 
-
-
-
-@user_blueprint.route('/verify')
-def verify():
-    return render_template('/verify.html')
-
 @user_blueprint.route('/reset')
 def reset():
     return render_template('/reset.html')
 
 @user_blueprint.route('/profile')
 @login_required
+@verify_required
 def profile():
     return render_template('/profile.html')
 

@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from .extensions import db, login_manager, csrf
+from .extensions import db, login_manager, csrf, mail, verify_required
 from .models import User, Post
 
 app = Flask(__name__)
@@ -11,12 +11,18 @@ db.init_app(app)
 
 # flask-login
 login_manager.init_app(app)
+login_manager.login_view = '/login'
+login_manager.login_message = '로그인을 먼저 해주세요.'
+login_manager.login_message_category = 'warning'
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(id)
 
 # flask-wtf
 csrf.init_app(app)
+
+# flask-mail
+mail.init_app(app)
 
 from project.home.views import home_blueprint
 from project.user.views import user_blueprint

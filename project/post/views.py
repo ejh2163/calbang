@@ -5,10 +5,8 @@ import math
 import datetime
 
 from project.models import Post
-from project import db
-
-
-from .edit_forms import EditForm
+from project import db, verify_required
+from project.post.edit_forms import EditForm
 
 
 post_blueprint = Blueprint('post', __name__, template_folder='templates')
@@ -43,6 +41,8 @@ def posts(page, page_num):
                             )
     
 @post_blueprint.route('/<page>/view/<int:post_id>')
+@login_required
+@verify_required
 def view(page, post_id):
     # update post.viewed count
     post = Post.query.filter(Post.id==post_id).first()
@@ -63,6 +63,7 @@ def view(page, post_id):
 
 @post_blueprint.route('/<page>/edit', methods=['GET', 'POST'])
 @login_required
+@verify_required
 def edit(page):
         
     form = EditForm()
