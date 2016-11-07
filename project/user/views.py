@@ -37,7 +37,7 @@ def register():
                 db.session.commit()
                 
                 # generate token and verify token url
-                token = generate_confirmation_token(new_user)
+                token = generate_confirmation_token(new_user.email)
                 verify_url = url_for('user.verify_email', token=token, _external=True)
                 # create email message and send
                 email_html = render_template('/verify_msg.html', verify_url=verify_url)
