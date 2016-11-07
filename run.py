@@ -13,12 +13,15 @@ if __name__ == "__main__":
     # sudo service mysql start
     # python run.py
     
-    # heroku logs
-    # heroku config
     # heroku addons:create cleardb:ignite --fork=mysql://jlee7737:@localhost/calbang
     # heroku config:set DATABASE_URL='db url goes here'
     # heroku run python migrate.py db migrate
     # heroku run python migrate.py db upgrade
+    
+    # heroku logs
+    # heroku config
+    # heroku addons
+    # heroku addons:destroy add-on-name-goes-here
     
     # git add .
     # git commit -am "msg goes here"

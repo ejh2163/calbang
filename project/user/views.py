@@ -47,7 +47,7 @@ def register():
                 flash_message = '환영합니다 ' + new_user.username+'님! 계정확인을 위해 이메일을 확인해주세요.'
                 flash(flash_message, 'success')
                 login_user(new_user)
-                return redirect(url_for('unverified'))
+                return redirect(url_for('user.unverified'))
             return render_template('/register.html', form=form, page=page)
         else:
             return render_template('/register.html', form=form, page=page)
