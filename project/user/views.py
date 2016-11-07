@@ -8,6 +8,7 @@ from project import db, verify_required
 from project.user.token import generate_confirmation_token, confirm_token
 from project.user.email import send_mail
 
+
 user_blueprint = Blueprint('user', __name__, template_folder='templates')
 
 

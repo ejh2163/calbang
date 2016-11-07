@@ -6,7 +6,8 @@ class Config(object):
     CSRF_ENABLED = True
     SECURITY_PASSWORD_SALT = 'saltysalt'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-
+    SQLALCHEMY_POOL_RECYCLE = 60
+    
     # mail settings
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 465
