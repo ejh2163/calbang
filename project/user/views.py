@@ -44,7 +44,7 @@ def register():
                 email_subject = '캘방 계정확인 이메일입니다'
                 send_mail(new_user.email, email_subject, email_html)
                 
-                flash_message = '환영합니다 ' + new_user.username+'님! 계정확인을 위해 이메일을 확인해주세요.'
+                flash_message = '환영합니다 ' + new_user.username+'님!'
                 flash(flash_message, 'success')
                 login_user(new_user)
                 return redirect(url_for('user.unverified'))

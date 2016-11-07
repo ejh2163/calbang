@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
         self.date_joined = date_joined
         self.email = email
         self.username = username
-        self.password = generate_password_hash(password, method='pbkdf2:sha512:100000')
+        self.password = generate_password_hash(password, method='pbkdf2:sha256:100000')
         self.verified = 0
     
     def __repr__(self):
