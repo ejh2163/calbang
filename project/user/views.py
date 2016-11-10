@@ -48,6 +48,8 @@ def register():
                 flash_message = '환영합니다 ' + new_user.username+'님!'
                 flash(flash_message, 'success')
                 login_user(new_user)
+                
+                db.session.close()
                 return redirect(url_for('user.unverified'))
             return render_template('/register.html', form=form, page=page)
         else:
@@ -95,6 +97,8 @@ def login():
             if user:
                 if authenticated:
                     login_user(user, remember=form.remember_me.data)
+                    
+                    db.session.close()
                     return redirect(url_for('home.home'))
                 else:
                     flash('아이디와 비밀번호가 일치하지 않습니다', 'danger')

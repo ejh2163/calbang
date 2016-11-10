@@ -23,8 +23,8 @@ class Config(object):
     
 class DevConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql://jlee7737:@localhost/calbang'
-    SECRET_KEY = '\x95\xdc?\xba\xfdO\xde\xb6"\xcdm\x1el3T<\xf0\xd5\x86\xf6\xa4\xfa\x1b\xfb'
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    SECRET_KEY = os.environ['SECRET_KEY']
     
 class ProdConfig(Config):
     DEBUG = False

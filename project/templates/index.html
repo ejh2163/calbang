@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     
     <script src='https://www.google.com/recaptcha/api.js'></script>
-
     <title>Title Static</title>
 </head>
 <body>
@@ -37,19 +36,24 @@
 <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/fotorama.js') }}"></script>
-<script src="https://use.fontawesome.com/573e1939a9.js"></script>
+<script src="https://use.fontawesome.com/1ca5ebbc33.js"></script>
 <script>
     $(document).ready(function(){ 
         $('.fade-in').hide().fadeIn();
+    });
+    $(document).ready(function(){
         $('#rangeslider').slider({
             range: true,
             min: 0,
             max: {{ price_max }},
             values: [0, {{ price_max }}],
             slide: function( event, ui ) {
-                $('#rangeval').html("$"+ui.values[0]+" ~ $"+ui.values[1]);
+                $('#rangemin').val("$" + ui.values[0] );
+                $('#rangemax').val("$" + ui.values[1] );
             }
         });
+        $('#rangemin').val( "$" + $("#rangeslider").slider("values", 0) );
+        $('#rangemax').val( "$" + $("#rangeslider").slider("values", 1) );
     });
 </script>
 </html>

@@ -21,7 +21,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				{% if current_user.is_authenticated: %}
-					<li{% if page=='profile': %} class="nav-active"{% endif %}><a href="/profile"><i class="fa fa-user" aria-hidden="true"></i> {{ current_user.username }}</a></li>
+					<li{% if page=='profile': %} class="nav-active"{% endif %}><a href="/profile"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{ current_user.username }}</a></li>
 					<li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 로그아웃</a></li>
 				{% else %}
 					<li{% if page=='register': %} class="nav-active"{% endif %}><a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i> 회원가입</a></li>

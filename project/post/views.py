@@ -12,6 +12,10 @@ from project.post.edit_forms import EditForm
 post_blueprint = Blueprint('post', __name__, template_folder='templates')
 
 
+@post_blueprint.route('/_filter_process', methods=['GET', 'POST'])
+def _filter():
+    pass
+
 @post_blueprint.route('/<page>/<int:page_num>', methods=['GET'])
 def posts(page, page_num):
     # query filter components
@@ -19,7 +23,7 @@ def posts(page, page_num):
     price_max = db.session.query(db.func.max(Post.price)).filter(Post.page==page).scalar()
     if price_max == None:
         price_max = 0
-    regions = db.session.query(Post.region.distinct().label('region')).filter(Post.page==page).order_by(Post.region).limit(100).all()
+    cities = db.session.query(Post.city.distinct().label('city')).filter(Post.page==page).order_by(Post.city).limit(100).all()
     
     # query post and post components
     posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).offset((page_num-1)*(18)).limit(18).all()
@@ -29,12 +33,13 @@ def posts(page, page_num):
     elif page=='bnb':
         price_suffix = '/일'
     
+    db.session.close()
     return render_template('/posts.html', 
                             page=page, 
                             page_num=page_num, 
                             price_min=price_min, 
                             price_max=price_max, 
-                            regions=regions, 
+                            cities=cities, 
                             posts=posts,
                             price_suffix=price_suffix,
                             today=datetime.datetime.now()

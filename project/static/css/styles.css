@@ -18,9 +18,9 @@ p, span{
     padding: 0px;
 }
 hr{
+    display: block;
     margin: 6px 0px 6px 0px;
-    border-top: 1px solid #d4d4d4;
-    box-shadow: 0 1px 1px 0px rgba(0,0,0,0.1);
+    border-top: 1px solid #dedede;
 }
 .clear{
     clear: both;
@@ -54,13 +54,10 @@ hr{
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.form-control, .input-group-btn{
-    border-radius: 0px;
-}
 
 
 /**************************************************/
-/* navbar CSS */
+/* navbar CSS
 /**************************************************/
 .navbar-custom {
     background-color: #ffffff;
@@ -93,7 +90,7 @@ hr{
 }
 
 /**************************************************/
-/* card page CSS */
+/* card page CSS
 /**************************************************/
 .filter-select{
     margin: 3px 0px 6px 0px;
@@ -115,15 +112,23 @@ hr{
 .form-control-select{
     border-radius: 4px;
     text-align: left;
+    font-size:13px;
+}
+.btn-filter{
+    width: 100%;
+    border: none;
+    background-color: #0066CD;
+    font-weight: bold;
+    color: #ffffff;
 }
 .card {
     display: block;
     position: relative;
     margin: 6px 0px 6px 0px;
-    height: 288px;
+    height: 255px;
     background-color: #ffffff;
     border-radius: 0px;
-    border: 1px solid #d4d4d4;
+    border: 1px solid #dedede;
     transition: box-shadow .25s;
     overflow: hidden;
 }
@@ -139,20 +144,21 @@ hr{
     opacity: 0.75;
     padding: 1px 4px 1px 4px;
     color: #FFFFFF;
+    font-family: arial;
     font-size: 11px;
 }
 .card-img {
     width: 100%;
-    height: 180px;
+    height: 147px;
     border-top-left-radius:0px;
     border-top-right-radius:0px;
-    border-bottom: 1px solid #d4d4d4;
+    border-bottom: 1px solid #dedede;
     display:block;
     overflow: hidden;
 }
 .card-img img{
     width: 100%;
-    height: 180px;
+    height: 147px;
     object-fit: cover;
     transition: all .25s ease;
 }
@@ -179,20 +185,23 @@ hr{
     font-size: 13px;
 }
 .card-body-2 {
-    margin: 12px 0px 3px 0px;
+    margin: 10px 0px 2px 0px;
     padding: 0px 6px 0px 6px;
     color: #444444;
     font-weight: bold;
     font-size: 18px;
+    text-align:right;
 }
 .card-body-3 {
     font-size: 13px;
     font-weight: normal;
 }
 .card-read-more {
+    border-top: 1px solid #dedede;
+}
+.card-read-more-text {
     margin: 3px 0px 3px 0px;
-    padding: 1px 6px 0px 6px;
-    border-top: 1px solid #D4D4D4;
+    padding: 0px 2px 0px 5px;
     color: #757575;
     font-size: 12px;
 }
@@ -224,7 +233,7 @@ hr{
 }
 
 /**************************************************/
-/* view pages CSS */
+/* view pages CSS
 /**************************************************/
 .view-subject{
     margin: 12px 0px 12px 0px;
@@ -233,47 +242,54 @@ hr{
 }
 .view-box{
     margin: 3px 0px 3px 0px;
-    padding: 6px 12px 6px 12px;
-    border: 1px solid #eeeeee;
+    padding: 6px 9px 6px 9px;
+    border: 1px solid #dedede;
     box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);
 }
 .view-box-price{
-    margin: 6px 0px 6px 0px;
+    margin: 0px 0px 6px 0px;
     color: #444444;
     font-size: 24px;
     font-weight: bold;
 }
 .view-box-title{
-    margin: 6px 0 6px 0;
-    font-size: 16px;
+    margin: 3px 0px 6px 0px;
+    font-size: 15px;
     font-weight: bold;
     color: #0066CD;
 }
 .view-box-corner{
     float: right;
-    margin: 7px 0 0 0;
+    margin: 3px 0px 6px 0px;
     font-size: 13px;
     color: #757575;
 }
 .view-box-subtitle{
-    margin: 6px 0 6px 0;
-    font-size: 14px;
+    margin: 6px 0px 6px 0px;
+    padding: 0;
+    font-size: 13.5px;
     font-weight: bold;
+    color: #444444;
 }
 .view-box-stat{
-    margin: 6px 0 6px 0;
+    margin: 6px 0px 6px 0px;
     padding: 0;
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: normal;
+    color: #444444;
 }
 .fotorama{
-    margin: 3px 0 3px 0;
-    border: 1px solid #eeeeee;
+    margin: 3px 0px 3px 0px;
+    border: 1px solid #dedede;
     box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);
+}
+.view-body{
+    margin: 3px 0px 3px 0px;
+    padding: 6px 9px 6px 9px;
 }
 
 /**************************************************/
-/* user pages CSS */
+/* user pages CSS
 /**************************************************/
 .btn-sign{
     color: #ffffff;
@@ -288,7 +304,7 @@ hr{
 }
 
 /**************************************************/
-/* edit page CSS */
+/* edit page CSS
 /**************************************************/
 .modal.modal-wide .modal-dialog {
     width: 90%;
@@ -297,7 +313,7 @@ hr{
     display: block;
     margin-bottom: 9px;
     padding: 9px 9px 0px 9px;
-    border: 1px solid #d4d4d4;
+    border: 1px solid #dedede;
     overflow: hidden;
     /*box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);*/
     background-color: #FFFFFF;
@@ -317,7 +333,7 @@ hr{
 }
 
 /**************************************************/
-/* footer CSS */
+/* footer CSS
 /**************************************************/
 .footer{
     margin-top: 120px;
@@ -330,8 +346,11 @@ hr{
 @media only screen and (max-width : 991px) {
 /* only size 'sm' and below */
     /**************************************************/
-    /* card page media CSS */
+    /* card page media CSS
     /**************************************************/
+    .card-viewed {
+        font-size: 10px;
+    }
     .card-img {
         height: 120px;
     }
@@ -339,41 +358,32 @@ hr{
         height: 120px;
     }
     .card{
-        height: 219px;
+        height: 222px;
     }
     .card-subject {
         font-size: 13px;
     }
     .card-body-1 {
-        font-size: 12px;
+        font-size: 12.5px;
     }
     .card-body-2 {
-        font-size: 15px;
+        font-size: 17px;
     }
     .card-body-3 {
-        font-size: 12px;
+        font-size: 12.5px;
     }
-    .card-read-more {
-        font-size: 10.5px;
+    .card-read-more-text {
+        font-size: 11px;
     }
     .card-premium-empty a{
         font-size: 13px;
     }
     
     /**************************************************/
-    /* view page media CSS */
+    /* view page media CSS
     /**************************************************/
     .view-subject{
         font-size: 20px;
-    }
-    .view-box-title{
-        font-size: 15px;
-    }
-    .view-box-subtitle{
-        font-size: 13.5px;
-    }
-    .view-box-stat{
-        font-size: 13.5px;
     }
 }
 @media only screen and (max-width : 767px) {
