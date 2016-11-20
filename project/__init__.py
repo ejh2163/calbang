@@ -28,4 +28,3 @@ from project.post.views import post_blueprint
 app.register_blueprint(home_blueprint)
 app.register_blueprint(user_blueprint)
 app.register_blueprint(post_blueprint)
-

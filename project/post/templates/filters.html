@@ -1,0 +1,58 @@
+<!-- filters template -->
+
+<form class="row" id="filter-form">
+    <div class="col-xs-24 col-sm-9 col-md-9">
+        <div class="post-filter">
+            <span class="filter-title">금액</span>
+            <div class="price-input">
+                <input class="price-input-min" readonly type="text" id="rangemin" name="pmin">
+                <span> ~ </span>
+                <input class="price-input-max" readonly type="text" id="rangemax" name="pmax">
+            </div>
+            <div id="rangeslider"></div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3">
+        <div class="post-filter">
+            <span class="filter-title">방</span>
+            <select name="beds" class="form-control filter-select" onchange="this.form.submit()">
+                <option value="0" {% if request.args.get('beds')=='0': %} selected="selected" {% endif %}>0+</option>
+                <option value="1" {% if request.args.get('beds')=='1': %} selected="selected" {% endif %}>1+</option>
+                <option value="2" {% if request.args.get('beds')=='2': %} selected="selected" {% endif %}>2+</option>
+                <option value="3" {% if request.args.get('beds')=='3': %} selected="selected" {% endif %}>3+</option>
+                <option value="4" {% if request.args.get('beds')=='4': %} selected="selected" {% endif %}>4+</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3">
+        <div class="post-filter">
+            <span class="filter-title">화장실</span>
+            <select name="baths" class="form-control filter-select" onchange="this.form.submit()">
+                <option value="0" {% if request.args.get('baths')=='0': %} selected="selected" {% endif %}>0+</option>
+                <option value="1" {% if request.args.get('baths')=='1': %} selected="selected" {% endif %}>1+</option>
+                <option value="2" {% if request.args.get('baths')=='2': %} selected="selected" {% endif %}>2+</option>
+                <option value="3" {% if request.args.get('baths')=='3': %} selected="selected" {% endif %}>3+</option>
+                <option value="4" {% if request.args.get('baths')=='4': %} selected="selected" {% endif %}>4+</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="post-filter">
+            <span class="filter-title">지역</span>
+            <select name="city" class="form-control filter-select-long" onchange="this.form.submit()">
+                <option value=''>전체</option>
+                {% for city in cities: %}
+                    <option value="{{city.city}}" {% if request.args.get('city')==city.city: %} selected="selected" {% endif %}>
+                        {{ city.city }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <!--<div class="col-xs-24 col-sm-3">
+        <div class="post-filter">
+            <br class="hidden-xs">
+            <input class="form-control btn-filter-apply" type="submit" value="검색">
+        </div>
+    </div>-->
+</form>

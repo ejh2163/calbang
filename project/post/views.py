@@ -11,27 +11,58 @@ from project.post.edit_forms import EditForm
 
 post_blueprint = Blueprint('post', __name__, template_folder='templates')
 
-
-@post_blueprint.route('/_filter_process', methods=['GET', 'POST'])
-def _filter():
-    pass
-
+# ********************************************************************************
+# View for Posts Page
+# 
+# - url passes in page and page_num
+# - filters pass in url parameters, grabbed using request.args.get and adjusts
+#   posts query
+# ********************************************************************************
 @post_blueprint.route('/<page>/<int:page_num>', methods=['GET'])
 def posts(page, page_num):
+    # request.args url parameters
+    pmin = 0
+    pmax = 0
+    if request.args.get('pmin') and request.args.get('pmax'):
+        pmin = int(re.search(r'\d+', request.args.get('pmin')).group())
+        pmax = int(re.search(r'\d+', request.args.get('pmax')).group())
+    beds = 0
+    if request.args.get('beds'):
+        beds = request.args.get('beds')
+    baths = 0
+    if request.args.get('baths'):
+        baths = request.args.get('baths')
+    city = ''
+    if request.args.get('city'):
+        city = request.args.get('city')
+
     # query filter components
     price_min = db.session.query(db.func.min(Post.price)).filter(Post.page==page).scalar()
     price_max = db.session.query(db.func.max(Post.price)).filter(Post.page==page).scalar()
-    if price_max == None:
-        price_max = 0
+    if pmin and pmax:
+        pmin_filtered = pmin
+        pmax_filtered = pmax
+    else: 
+        pmin_filtered = price_min
+        pmax_filtered = price_max
     cities = db.session.query(Post.city.distinct().label('city')).filter(Post.page==page).order_by(Post.city).limit(100).all()
     
     # query post and post components
-    posts = Post.query.filter(Post.page==page).order_by(Post.id.desc()).offset((page_num-1)*(18)).limit(18).all()
-    price_suffix = ''
+    posts = (Post.query
+            .filter(Post.page==page)
+            .filter(Post.price>=pmin_filtered)
+            .filter(Post.price<=pmax_filtered)
+            .filter(Post.bedrooms>=beds)
+            .filter(Post.bathrooms>=baths)
+            .filter(Post.city.contains(city))
+            .order_by(Post.id.desc())
+            .offset((page_num-1)*(18)).limit(18).all()
+            )
+    price_deco = ''
     if page in ['rent','homestay']:
-        price_suffix = '/월'
+        price_deco = '월'
     elif page=='bnb':
-        price_suffix = '/일'
+        price_deco = '일'
     
     db.session.close()
     return render_template('/posts.html', 
@@ -39,32 +70,42 @@ def posts(page, page_num):
                             page_num=page_num, 
                             price_min=price_min, 
                             price_max=price_max, 
+                            pmin_filtered=pmin_filtered, 
+                            pmax_filtered=pmax_filtered, 
+                            price_deco=price_deco, 
                             cities=cities, 
-                            posts=posts,
-                            price_suffix=price_suffix,
+                            posts=posts, 
                             today=datetime.datetime.now()
                             )
     
 @post_blueprint.route('/<page>/view/<int:post_id>')
-@login_required
-@verify_required
 def view(page, post_id):
     # update post.viewed count
     post = Post.query.filter(Post.id==post_id).first()
     post.viewed += 1
     db.session.commit()
     
-    price_suffix = ''
+    price_deco = ''
     if page in ['rent','homestay']:
-        price_suffix = '/월'
+        price_deco = '월'
     elif page=='bnb':
-        price_suffix = '/일'
+        price_deco = '일'
     
     return render_template('/view.html', 
                             page=page,
                             post=post,
-                            price_suffix=price_suffix,
+                            price_deco=price_deco,
+                            today=datetime.datetime.now()
                             )
+
+@post_blueprint.route('/<page>/new', methods=['GET', 'POST'])
+@login_required
+@verify_required
+def new(page):
+        
+    form = EditForm()
+    
+    return render_template('edit.html', page=page, form=form)
 
 @post_blueprint.route('/<page>/edit', methods=['GET', 'POST'])
 @login_required

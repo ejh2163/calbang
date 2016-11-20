@@ -4,18 +4,19 @@
     src: url(../fonts/BM-HANNA.ttf);
 }
 @font-face {
-    font-family: jejugothic;
-    src: url(../fonts/JejuGothic-Regular.ttf);
+    font-family: NotoSans;
+    src: url(../fonts/NotoSansKR-Regular.otf);
 }
+
 html,
 body{
     min-height: 100%;
     background-color: #FFFFFF;
-    font-family: Raleway, arial;
+    font-family: NotoSans, arial;
 }
-p, span{
-    margin: 0px;
-    padding: 0px;
+p, span, h1, h2, h3, h4{
+    margin: 0;
+    padding: 0;
 }
 hr{
     display: block;
@@ -65,15 +66,9 @@ hr{
     border-bottom: 0px;
     box-shadow: 0 3px 6px -1px rgba(0,0,0,0.3);
 }
-.navbar-brand span{
-    color: #0066CD;
-    font-family: hanna;
-    font-size: 24px;
-    font-weight: normal;
-}
 .navbar a{
     color: #6c6c6c;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
 }
 .navbar li a:hover{
@@ -81,8 +76,10 @@ hr{
     color: #0066CD;
 }
 .navbar-toggle .icon-bar {
-    width: 18px;
-    height: 2px;
+    /*width: 18px;
+    height: 2px;*/
+    width: 24px;
+    height: 3px;
     background-color: #6c6c6c;
 }
 .nav-active a{
@@ -90,50 +87,72 @@ hr{
 }
 
 /**************************************************/
-/* card page CSS
+/* filters CSS
 /**************************************************/
-.filter-select{
-    margin: 3px 0px 6px 0px;
-    font-weight:bold;
+.post-filter{
+    margin: 3px 6px 6px 6px;
+}
+.filter-title{
+    font-weight: bold;
+}
+.price-input{
+    margin-top: -9px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: oxygen;
+}
+.price-input-min{
+    border: 0;
+    width: 30%;
+    text-align: right;
+}
+.price-input-max{
+    border: 0;
+    width: 30%;
 }
 .ui-slider {
     height: 15px;
-    width: 93.75%;
-    left: 3%;
-    margin: 3px 0px 3px 0px;
+    width: 95%;
+    left: 2.3%;
+    margin: 1px 0px 6px 0px;
 }
 .ui-slider .ui-slider-handle {
-    height: 21px;
-    width: 18px;
+    height: 20px;
+    width: 20px;
 }
 .ui-slider .ui-slider-range{
     background-color: #D2E6F6;
 }
-.form-control-select{
+.filter-select{
     border-radius: 4px;
     text-align: left;
-    font-size:13px;
 }
-.btn-filter{
-    width: 100%;
+.filter-select-long{
+    border-radius: 4px;
+    text-align: left;
+    font-size: 13px;
+}
+.btn-filter-apply{
     border: none;
     background-color: #0066CD;
     font-weight: bold;
-    color: #ffffff;
+    color: #FFFFFF;
 }
+
+/**************************************************/
+/* card page CSS
+/**************************************************/
 .card {
     display: block;
     position: relative;
-    margin: 6px 0px 6px 0px;
-    height: 255px;
-    background-color: #ffffff;
-    border-radius: 0px;
-    border: 1px solid #dedede;
+    margin: 6px;
+    border: 0;
     transition: box-shadow .25s;
     overflow: hidden;
 }
 .card:hover {
-    box-shadow: 0 2px 6px 0px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 8px 0px rgba(0,0,0,0.5);
 }
 .card-viewed {
     position:absolute;
@@ -141,69 +160,66 @@ hr{
     top: 6px;
     background-color: #444444;
     border-radius: 3px;
-    opacity: 0.75;
-    padding: 1px 4px 1px 4px;
+    opacity: 0.65;
+    padding: 1px 3px 1px 3px;
     color: #FFFFFF;
     font-family: arial;
     font-size: 11px;
 }
 .card-img {
     width: 100%;
-    height: 147px;
-    border-top-left-radius:0px;
-    border-top-right-radius:0px;
-    border-bottom: 1px solid #dedede;
+    height: 100%;
     display:block;
     overflow: hidden;
 }
 .card-img img{
     width: 100%;
-    height: 147px;
+    height: 100%;
     object-fit: cover;
     transition: all .25s ease;
 }
 .card-content{
-    text-align: left;
+    position:absolute;
+    width: 100%;
+    bottom: 0px;
+    background: -webkit-linear-gradient(to top, rgba(68,68,68,1), rgba(68,68,68,0));
+    background: -o-linear-gradient(to top, rgba(68,68,68,1), rgba(68,68,68,0));
+    background: -moz-linear-gradient(to top, rgba(68,68,68,1), rgba(68,68,68,0));
+    background: linear-gradient(to top, rgba(68,68,68,1), rgba(68,68,68,0));
+    padding: 2px 4px 2px 4px;
+    color: #FFFFFF;
 }
-.card-subject {
-    margin: 6px 0px 3px 0px;
-    padding: 0px 6px 0px 6px;
-    font-weight: bold;
+.card-subject{
+    margin-top: 12px;
+}
+.card-subject a{
     font-size: 14px;
+    color: #FFFFFF;
 }
-.card-subject a {
-    color: #0066CD;
-}
-.card-title a:hover{
-    color: #004081;
+.card-subject a:hover{
     text-decoration: none;
 }
-.card-body-1 {
-    margin: 3px 0px 3px 0px;
-    padding: 0px 6px 0px 6px;
+.card-desc {
+    margin: 0 0 2px 0;
+    font-size: 14px;
     font-weight: bold;
-    font-size: 13px;
 }
-.card-body-2 {
-    margin: 10px 0px 2px 0px;
-    padding: 0px 6px 0px 6px;
-    color: #444444;
-    font-weight: bold;
+.card-desc-price {
     font-size: 18px;
-    text-align:right;
+    font-weight: bold;
 }
-.card-body-3 {
-    font-size: 13px;
+.card-desc-2 {
+    font-size: 12px;
     font-weight: normal;
 }
 .card-read-more {
     border-top: 1px solid #dedede;
 }
 .card-read-more-text {
-    margin: 3px 0px 3px 0px;
-    padding: 0px 2px 0px 5px;
-    color: #757575;
-    font-size: 12px;
+    margin: 1px 0 0 0;
+    padding: 0 0 0 1px;
+    /*color: #757575;*/
+    font-size: 11px;
 }
 .card-premium-empty a{
     font-weight: bold;
@@ -219,73 +235,106 @@ hr{
 .pagination>li.active>a{
     background-color: #0066CD;
 }
-.btn-to-edit{
-    margin: 6px 0px 12px 0px;
+.btn-new{
+    margin: 6px 0px 6px 0px;
     width: 100%;
     border: none;
     background-color: #0066CD;
     font-weight: bold;
     color: #ffffff;
 }
-.btn-to-edit:hover{
-    color: #ffffff;
+.btn-new:hover{
     background-color: #004081;
 }
 
 /**************************************************/
-/* view pages CSS
+/* view modal CSS
 /**************************************************/
-.view-subject{
-    margin: 12px 0px 12px 0px;
+.heading-box{
+    margin: 6px;
+    height: 30px;
+}
+.modal-header{
+    border:0;
+}
+.modal-title{
+    font-size: 21px;
+}
+.modal-content{
+    border-radius: 0;
+}
+.modal-body{
+    margin: 0;
+    padding: 0;
+}
+/*.view-subject{
+    float:left;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 24px;
     font-weight: bold;
+    color: #444444;
+}*/
+.view-options{
+    float: right;
+    margin: 6px 0 0 0;
+    font-weight: bold;
 }
-.view-box{
-    margin: 3px 0px 3px 0px;
-    padding: 6px 9px 6px 9px;
-    border: 1px solid #dedede;
-    box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);
+.view-options a{
+    margin: 0 3px 0 12px;
+    color: #757575;
+}
+.view-options a:hover{
+    color: #004081;
+    text-decoration: none;
+}
+.view-content{
+    padding: 0 12px 0 12px;
+    border-top: 1px solid #dedede;
 }
 .view-box-price{
-    margin: 0px 0px 6px 0px;
+    margin: 0px 0px 9px 0px;
     color: #444444;
     font-size: 24px;
     font-weight: bold;
 }
 .view-box-title{
-    margin: 3px 0px 6px 0px;
-    font-size: 15px;
+    margin: 2px 0px 9px 0px;
+    font-size: 16px;
     font-weight: bold;
     color: #0066CD;
 }
+.view-box-title2{
+    margin: 0px 0px 3px 0px; 
+    font-weight: bold;
+    font-size: 14px;
+}
 .view-box-corner{
     float: right;
-    margin: 3px 0px 6px 0px;
+    margin: 3px 0 0 0;
     font-size: 13px;
     color: #757575;
 }
 .view-box-subtitle{
-    margin: 6px 0px 6px 0px;
-    padding: 0;
-    font-size: 13.5px;
+    width: 30%;
+    padding: 3px 0 3px 0;
+    font-size: 14px;
     font-weight: bold;
     color: #444444;
 }
 .view-box-stat{
-    margin: 6px 0px 6px 0px;
-    padding: 0;
-    font-size: 13.5px;
+    padding: 3px 0 3px 0;
+    font-size: 14px;
     font-weight: normal;
     color: #444444;
 }
-.fotorama{
-    margin: 3px 0px 3px 0px;
-    border: 1px solid #dedede;
-    box-shadow: 0 1px 3px 0px rgba(0,0,0,0.2);
-}
 .view-body{
-    margin: 3px 0px 3px 0px;
-    padding: 6px 9px 6px 9px;
+    padding: 6px;
+}
+.view-adspace{
+    margin: 6px;
+    border:1px solid red;
 }
 
 /**************************************************/
@@ -306,9 +355,7 @@ hr{
 /**************************************************/
 /* edit page CSS
 /**************************************************/
-.modal.modal-wide .modal-dialog {
-    width: 90%;
-}
+
 .form-box {
     display: block;
     margin-bottom: 9px;
@@ -348,47 +395,49 @@ hr{
     /**************************************************/
     /* card page media CSS
     /**************************************************/
+    .card{
+        margin: 3px;
+    }
+    .post-filter{
+        margin: 0 4px 4px 4px;
+    }
+    .modal-dialog {
+        width: 97%;
+        margin: 30px auto;
+    }
+}
+
+@media only screen and (max-width : 767px) {
+/* only size 'xs' and below */
+    /**************************************************/
+    /* card page media CSS
+    /**************************************************/
     .card-viewed {
         font-size: 10px;
-    }
-    .card-img {
-        height: 120px;
-    }
-    .card-img img{
-        height: 120px;
-    }
-    .card{
-        height: 222px;
     }
     .card-subject {
         font-size: 13px;
     }
-    .card-body-1 {
-        font-size: 12.5px;
+    .card-desc {
+        font-size: 13px;
     }
-    .card-body-2 {
-        font-size: 17px;
+    .card-desc-price {
+        font-size: 16px;
     }
-    .card-body-3 {
-        font-size: 12.5px;
-    }
-    .card-read-more-text {
+    .card-desc-2 {
         font-size: 11px;
     }
-    .card-premium-empty a{
-        font-size: 13px;
+    .card-read-more-text {
+        font-size: 10px;
     }
     
     /**************************************************/
     /* view page media CSS
     /**************************************************/
+    
     .view-subject{
-        font-size: 20px;
+        font-size: 22px;
     }
-}
-@media only screen and (max-width : 767px) {
-/* only size 'xs' and below */
-
 }
 
 /*"http://www.fostrap.com/"*/

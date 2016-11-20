@@ -56,26 +56,31 @@ class Post(db.Model):
     page = db.Column(db.String(12), nullable=False)
     viewed = db.Column(db.Integer, nullable=False, default=0)
     subject = db.Column(db.String(120), nullable=False)
-    body = db.Column(db.Text)
+    body = db.Column(db.Text, nullable=False)
     phone = db.Column(db.String(12))
     email = db.Column(db.String(120))
     kakaotalk = db.Column(db.String(30))
-    city = db.Column(db.String(24))
-    price = db.Column(db.Integer)
+    city = db.Column(db.String(24), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     image_ext = db.Column(db.String(240), default='/static/images/no-photo.png')
     
     address = db.Column(db.String(240))
-    bedrooms = db.Column(db.String(6))
-    bathrooms = db.Column(db.String(6))
-    parking = db.Column(db.String(6))
-    sqft = db.Column(db.Integer())
-    year = db.Column(db.Integer())
+    bedrooms = db.Column(db.Integer, nullable=False)
+    bathrooms = db.Column(db.Integer, nullable=False)
+    parking = db.Column(db.Integer)
+    utilities = db.Column(db.String(6))
+    internet = db.Column(db.String(6))
+    furniture = db.Column(db.String(6))
+    food = db.Column(db.String(6))
+    sqft = db.Column(db.Integer)
+    year = db.Column(db.Integer)
     
-    def __init__(self, date_posted, username, page, viewed, 
-                subject, body, phone, email, kakaotalk, city, price, image_ext, 
-                address, bedrooms, bathrooms, parking, sqft, year):
+    def __init__(self, date_posted, username, page, viewed, subject, body, 
+                phone, email, kakaotalk, city, price, image_ext, address, 
+                bedrooms, bathrooms, parking, utilities, internet, furniture, food, 
+                sqft, year):
         self.date_posted = date_posted
-        self.username = current_user.username
+        self.username = username
         self.page = page
         self.viewed = viewed
         self.subject = subject
@@ -91,9 +96,12 @@ class Post(db.Model):
         self.bedrooms = bedrooms
         self.bathrooms = bathrooms
         self.parking = parking
+        self.utilities = utilities
+        self.internet = internet
+        self.furniture = furniture
+        self.food = food
         self.sqft = sqft
         self.year = year
-        
         
     def __repr__(self):
         return '<%>' % self.subject
