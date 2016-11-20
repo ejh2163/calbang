@@ -13,7 +13,7 @@ with app.app_context():
                 password = '48cd3f6p',
                 verified = 1
                 )
-    newpost_bnb = Post(
+    newpost_bnb1 = Post(
                 date_posted=datetime.datetime.now(), 
                 username='admin', 
                 page='bnb', 
@@ -23,8 +23,32 @@ with app.app_context():
                 phone='123-456-7890', 
                 email='calbang.noreply@gmail.com', 
                 kakaotalk='calbang', 
-                city='Riverside, CA', 
-                price='500', 
+                city='Fullerton, CA', 
+                price='50', 
+                image_ext=None,
+                address='1234 Wilshire Blvd.', 
+                bedrooms=0, 
+                bathrooms=0, 
+                parking=1, 
+                utilities=None, 
+                internet=None,
+                furniture=None, 
+                food=None, 
+                sqft=1234, 
+                year=1991
+                )
+    newpost_bnb2 = Post(
+                date_posted=datetime.datetime.now(), 
+                username='admin', 
+                page='bnb', 
+                viewed=0, 
+                subject='민박 샘플 포스팅입니다2', 
+                body='민박 샘플 포스팅입니다', 
+                phone='123-456-7890', 
+                email='calbang.noreply@gmail.com', 
+                kakaotalk='calbang', 
+                city='Los Angeles, CA', 
+                price='100', 
                 image_ext=None,
                 address='1234 Wilshire Blvd.', 
                 bedrooms=0, 
@@ -62,6 +86,7 @@ with app.app_context():
                 year=1991
                 )
                 
-    db.session.add(newpost_bnb)
+    db.session.add(newpost_bnb1)
+    db.session.add(newpost_bnb2)
     db.session.add(newuser)
     db.session.commit()
