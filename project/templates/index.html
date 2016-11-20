@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/fotorama.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    
+    {% block script %}
+    {% endblock %}
+
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <title>Title Static</title>
 </head>
@@ -36,7 +38,5 @@
     {% include 'footer.html' %}
 </body>
 
-{% block script %}
-{% endblock %}
 
 </html>
