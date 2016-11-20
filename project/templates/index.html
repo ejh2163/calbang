@@ -3,7 +3,11 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+    
+    <script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="https://use.fontawesome.com/1ca5ebbc33.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.min.css') }}">
@@ -31,11 +35,6 @@
     </div>
     {% include 'footer.html' %}
 </body>
-
-<script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-<script src="https://use.fontawesome.com/1ca5ebbc33.js"></script>
 
 {% block script %}
 {% endblock %}
