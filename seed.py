@@ -88,5 +88,4 @@ with app.app_context():
                 
     db.session.add(newpost_bnb1)
     db.session.add(newpost_bnb2)
-    db.session.add(newuser)
     db.session.commit()
